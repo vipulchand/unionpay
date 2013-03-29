@@ -1,0 +1,49 @@
+Hi,
+
+
+here links for:
+
+Xdebug
+http://www.xdebug.org/
+
+Debugging with Xdebug
+http://xdebug.org/docs/remote
+
+Profiling with Xdebug & Kcachegrind
+http://xdebug.org/docs/profiler
+
+XHProf  (another profiler re-developed by facebook / was a dead project before)
+https://github.com/facebook/xhprof
+http://techportal.inviqa.com/2009/12/01/profiling-with-xhprof/
+
+Hudson CI (Continuous Integration - just for you to check it out, something we will start using as soon as we have time)
+http://hudson-ci.org/
+
+
+Setup for debugging with xdebug & eclipse/PDT:
+
+php.ini (In our development environment: /etc/php/apache2/conf.d/xdebug.ini):
+xdebug.remote_autostart=On
+xdebug.remote_connect_back=Off
+xdebug.remote_cookie_expire_time=3600
+xdebug.remote_enable=On
+xdebug.remote_handler=dbgp
+xdebug.remote_host=127.0.0.1
+xdebug.remote_log=
+xdebug.remote_mode=req
+xdebug.remote_port=9000
+
+for eclipse/PDT configuration, see attached screenshots.
+
+
+Best regards,
+
+-- 
+Carsten Schipke
+
+
+TMO Group
+Jiangning Road 495, room 2403
+Jing'an District, Shanghai
+
+e:carsten.schipke@tmogroup.asia
