@@ -6,8 +6,8 @@ require_once('../quickpay_service.php');
 
 //* 测试数据
 $transType   = quickpay_conf::CONSUME;
-$orderNumber = "20111108150703852";
-$orderTime   = "20111108150703";
+$orderNumber = "20130329163920172";
+$orderTime   = "20130329163920172";
 // */
 
 //需要填入的部分
@@ -29,7 +29,7 @@ echo "查询请求返回：<pre>\n" .  var_export($arr_ret, true) . "</pre>";
 $respCode = $response->get('respCode');
 $queryResult = $response->get('queryResult');
 
-if ($queryResult == quickpay_service::QUERY_FAIL) 
+if ($queryResult == quickpay_service::QUERY_FAIL)
 {
     echo "交易失败[respCode:{$respCode}]!\n";
     //更新数据库, 设置为交易失败
@@ -49,7 +49,7 @@ else if ($respCode == quickpay_service::RESP_SUCCESS
 {
     echo "交易处理中，下次再查!\n";
 }
-else 
+else
 {
     //其他异常错误
     $err = sprintf("Error[respCode:%d]", $response->get('respCode'));

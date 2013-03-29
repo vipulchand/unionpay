@@ -15,8 +15,8 @@ $param['orderTime']             = date('YmdHis');   //交易时间, YYYYmmhhddHH
 $param['orderCurrency']         = quickpay_conf::CURRENCY_CNY;  //交易币种，CURRENCY_CNY=>人民币
 
 $param['customerIp']            = $_SERVER['REMOTE_ADDR'];  //用户IP
-$param['frontEndUrl']           = "http://www.example.com/sdk/utf8/front_notify.php";    //前台回调URL
-$param['backEndUrl']            = "http://www.example.com/sdk/utf8/back_notify.php";    //后台回调URL
+$param['frontEndUrl']           = "http://www.unionpay.com/exa/front_notify.php";    //前台回调URL
+$param['backEndUrl']            = "http://www.unionpay.com/exa/back_notify.php";    //后台回调URL
 
 /* 可填空字段
    $param['commodityUrl']          = "http://www.example.com/product?name=商品";  //商品URL
