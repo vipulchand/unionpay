@@ -1,0 +1,276 @@
+<!-- compiler c -->
+
+If you have a need to compile Memcache or wget on Mac OS X Lion and are wondering why you are getting the error
+
+no acceptable C compiler found in $PATH
+
+on Mac OS X Lion, you’re not alone.
+
+Thanks to this post, I was able to fix my problem. Here are the steps.
+
+    Run App Store
+    Search for Xcode – it’s a free install from Apple
+    Wait for awhile. Took 30min to download for me on a 20mbps connection
+    Authenticate and let Xcode install. Once Xcode is installed you may be thinking you’re done. You would be wrong!
+    Launch Xcode and run the mobile toolkit update (you can’t skip it, deal with it)
+    Go to Xcode Preferences or press ⌘, (Command-comma)
+    Click the Downloads tab -> Components list as shown below
+    On the last row of the available downloads are the Command Line tools. Install them.
+
+You should be good to go after that!
+
+<!--  -->
+
+
+<!-- memcached for mac os -->
+
+
+Install memcached PHP extension on OS X Snow Leopard
+
+Posted by Glen Scott on August 30, 2009. 29 comments.
+
+Memories
+
+memcached is a very useful memory object caching system, which can be used to increase the performance of your dynamic scripts by caching database calls.
+
+This guide will explain how to install the memcached system, including the PHP extension, on Mac OS X 10.6.
+Xcode
+
+The Xcode package installs the necessary versions of tools like autoconf which is needed during the PHP extension compilation process. Make sure you have Xcode 3.2 installed; the install package is available on the Snow Leopard install DVD under the "Optional Installs" folder.
+libevent
+
+libevent is a pre-requisite for memcached.
+
+    cd /tmp; curl -O http://www.monkey.org/~provos/libevent-1.4.12-stable.tar.gz
+    tar zxvf libevent-1.4.12-stable.tar.gz
+    cd libevent-1.4.12-stable
+    ./configure; make
+    sudo make install
+
+memcached
+
+memcached is the daemon responsible for actually storing and retrieving arbitrary objects for your applications.
+
+    cd /tmp; curl -O http://memcached.googlecode.com/files/memcached-1.4.1.tar.gz
+    tar zxvf memcached-1.4.1.tar.gz
+    cd memcached-1.4.1
+    ./configure; make
+    sudo make install
+
+libmemcached
+
+libmemcached is the shared library that will allow clients, in this case PHP, access the memcached daemon.
+
+    Download libmemcached, move to /tmp and unpack
+    cd libmemcached-0.31
+    ./configure; make
+    sudo make install
+
+php extension
+
+Now we are ready to prepare the PHP extension to memcached, which is available from pecl.
+
+    cd /tmp; pecl download memcached
+    gzip -d < memcached-1.0.0.tgz | tar -xvf -
+    cd memcached-1.0.0; phpize
+
+You should see output similar to the following:
+
+Configuring for:
+PHP Api Version: 20090626
+Zend Module Api No: 20090626
+Zend Extension Api No: 220090626
+
+    ./configure; make
+    sudo make install
+
+On a successful install, you will get the following message:
+
+Installing shared extensions: /usr/lib/php/extensions/no-debug-non-zts-20090626/
+
+Modify your php.ini configuration file and make sure you have the following line included:
+
+extension = memcached.so
+
+You can then restart your Apache server:
+
+    sudo apachectl restart
+
+to make the memcached functionality available in your scripts.
+
+memcached php extension
+References
+
+    Compiling shared PECL extensions with phpize
+    PHP: Memcached - Manual
+
+If you found this post useful, it would be great if you could Like my Facebook page using the button in the sidebar. Thanks!
+
+<!--  -->
+
+<!-- install pear -->
+
+PEAR
+
+We need PEAR! For some reason, it's not set up ready to on Lion, but the install phar file is here, so we just need to run it.
+
+    cd /usr/lib/php
+    sudo php install-pear-nozlib.phar
+    Edit/etc/php.ini and find the line: ;include_path = ".:/php/includes" and change it to:
+    include_path = ".:/usr/lib/php/pear"
+    sudo pear channel-update pear.php.net
+    sudo pecl channel-update pecl.php.net
+    sudo pear upgrade-all
+
+<!--  -->
+
+
+<!-- autoconf install -->
+php:
+/usr/lib/php
+
+path:
+export PATH=/usr/local/share/python:$PATH
+
+curl -OL http://mirror.bjtu.edu.cn/gnu/autoconf/autoconf-latest.tar.gz
+tar xzf autoconf-2.68.tar.gz
+cd autoconf-2.68
+./configure --prefix=/usr/local
+make
+sudo make install
+
+<!--  -->
+
+<!-- install homebrew -->
+
+https://github.com/mxcl/homebrew/wiki/Installation
+
+cd /usr/local/
+
+mkdir homebrew && curl -L https://github.com/mxcl/homebrew/tarball/master | tar xz --strip 1 -C homebrew
+
+brew install git ack wget curl libmemcached readline sqlite gdbm pkg-config
+
+brew install pcre(php extension)
+=
++++++++++++++++++++++++++++++++++++++++++
+MacOS 源文件configure make install安装
+./configure --prefix=/usr/local/
+安装apc之前安装pcre
++++++++++++++++++++++++++++++++++++++++++
+
+
+<!--  -->
+
+
+
+Mac OS 安装完 xCode之后就已经有了memcached，默认位置在 /usr/bin/memcached
+启动方式 /usr/bin/memcached start
+
+
+2012年6月新款Macbook 全系列到货，订购从速!
+  之前为了修改host文件，启用了root帐户，并设置了密码，后来用了一段时间之后，系统升级什么的，密码不能登陆了，更改root密码也无效，修复系统权限，提示acl未修复最后差点把系统格了重装。最后终于解决不用重新安装系统。
+        方法如下，进入目录实用工具/system/library/coreservices/，在“菜单-编辑”里面确认此时root帐户为停用。
+
+
+点击下方“-”，删除这一项，保存退出目录实用工具。
+重新启动，按住＋r进入系统恢复模式，选择语言，进入磁盘工具，进行系统盘的权限验证和修复，完成后关闭磁盘工具。
+
+在屏幕上方菜单处选择”实用工具-终端“启动终端程序，直接输入resetpassword并回车，在弹出的密码重置程序中，选择你的系统所在宗卷，从用户列表里面找到system administrator（root）用户。
+
+点击”重设“按钮，来重置root帐户的访问控制列表ACL，待“重设”按钮变成灰色的“完成”。然后在用户列表里面选择你启用root帐户时所用的管理员帐户，重设ACL。最后重新新设定root密码，关闭窗口，退出密码设置程序，从菜单里面重新启动计算机。
+
+操作完毕。重新启用root帐户，便可按新设定的root密码登陆root帐户了
+
+How to Enable the root Account
+
+Follow these simple steps to enable the root account in Lion.
+
+Launch the Directory Utility. It is located in /System/Library/CoreServices.
+Click the padlock icon on the bottom left corner and enter your Administrator login credentials to unlock the application
+In the Edit menu, select Enable Root User
+Again from the Edit menu, select Change Root Password. A dialog window will apear prompting you to enter a root password
+<!--  -->
+
+<!-- Linux下PHP配置的核心思路是: -->
+
+安装
+
+各种所需插件:
+例如:libevent, pear, pecl etc...
+
+利用pear, pecl安装各种PHP Module.
+
+<!--  -->
+
+
+<!-- MacOS 下面的网站不可以建立在 桌面 -->
+<!--  -->
+
+<!-- MacOS 下 Xdebug Zenddebug 安装-->
+
+xdebug 自带-done.
+zenddebug to be installed-done.
+
+<!--  -->
+
+<!-- add program into PATH -->
+
+mac中设置PATH环境变量的命令：
+sudo vim /etc/paths
+
+设置:
+export PATH=$PATH:/usr/local/homebrew/bin/
+
+输出:
+echo $PATH
+
+<!--  -->
+
+
+<!-- Archiving Exercise -->
+
+<!--  -->
+
+<!-- The quick brown fox jumped over the lazy dog -->
+<!--  -->
+
+<!-- Install mcrypt PHP extension on Mac OS X -->
+
+1.tar zxvf libmcrypt-2.5.8.tar.gz and php-5.3.15.tar.gz
+2.brew install mcrypt(安装所需要的库)
+3.进入php-5.3.15/ext/mcrypt执行phpize -> ./configure -> make -> make install
+4.apachectl restart
+
+使用php的常见问题是：编译php时忘记添加某扩展，后来想添加扩展，但是因为安装php后又装了一些东西如PEAR等，不想删除目录重装，于是可以采用phpize。方法是：
+要有与现有php完全相同的php压缩包。我用的是php-5.2.6.tar.gz。 展开后进入里面的ext/mcrypt目录(里面是mcrypt的php扩展)，然后执行/usr/local/php/bin/phpize。phpize是安装php时安装好的一个工具，如果你的机器没有安装phpize工具，那么可能还是要make,make install php，仅仅为了得到phpize.
+执行完后，会发现当前目录下多了一些configure文件， 如果没报错，则根据提示运行
+./configure --with-php-config=/usr/local/php/bin/php-config
+     注意要先确保/usr/local/php/bin/php-config存在。
+make
+make install
+Php代码： ./configure --with-php-config=/usr/local/php/bin/php-config
+make install 之后系统会提示你mcrypt.so文件所在的目录。
+
+<!-- Install mcrypt PHP extension on Mac OS X -->
+
+PHP中如何安装 Mhash扩展库？
+http://www.zhujiangroad.com/html/soft/s3110.html
+
+需要准备的软件:
+drupal desktop
+
+frontend
+backend
+
+======================================================================================================================================================================
+20130311
+1.sms-afterinvoice
+->
+tmogroup->customproduct
+tmogroup->sms
+
+
+
+2.alipay-payment
+
