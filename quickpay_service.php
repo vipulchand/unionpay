@@ -136,6 +136,7 @@ class quickpay_service
 
         if (isset($this->args['commodityUrl'])) {
             $this->args['commodityUrl'] = self::encodeURI($this->args['commodityUrl']);
+            var_dump($this->args['commodityUrl']);
         }
 
         //merReserved: 前后台支付、查询
@@ -168,6 +169,7 @@ class quickpay_service
 
         //signature
         $this->args['signature']    = self::sign($this->args, quickpay_conf::$sign_method);
+
         $this->args['signMethod']   = quickpay_conf::$sign_method;
 
     } //end of constructor
@@ -264,6 +266,7 @@ class quickpay_service
 
     function create_html()
     {
+
         $html = <<<eot
 <html>
 <head>
@@ -294,7 +297,7 @@ eot;
         return $query_string;
     }
 
-    function post() 
+    function post()
     {
         return self::curl_call($this->api_url, $this->args, true, array(
                         CURLOPT_SSL_VERIFYPEER  => quickpay_conf::VERIFY_HTTPS_CERT,
@@ -314,9 +317,9 @@ eot;
      *	mixed:
      *	  false: error happened
      *	  string: curl return data
-     * 
+     *
      */
-    static function curl_call($url, $data = null, $is_post = true, $options = null) 
+    static function curl_call($url, $data = null, $is_post = true, $options = null)
     {
         if (function_exists("curl_init")) {
             $curl = curl_init();
@@ -325,14 +328,14 @@ eot;
                 $data = http_build_query($data);
             }
 
-            if ($is_post) { 
+            if ($is_post) {
                 curl_setopt($curl, CURLOPT_POST, 1);
                 curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
             }
             else { //GET
-                if (!empty($data)) { 
+                if (!empty($data)) {
                     $sep = '?';
-                    if (strpos($url, '?') !== false) { 
+                    if (strpos($url, '?') !== false) {
                         $sep = '&';
                     }
                     $url .= $sep . $data;
@@ -344,7 +347,7 @@ eot;
             curl_setopt($curl, CURLOPT_HEADER, false);
             curl_setopt($curl, CURLOPT_TIMEOUT, 60); //seconds
 
-            if (is_array($options)) { 
+            if (is_array($options)) {
                 foreach($options as $key => $value) {
                     curl_setopt($curl, $key, $value);
                 }

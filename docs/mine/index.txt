@@ -6365,6 +6365,64 @@ Wapalipay: /etc/system.xml
 						</order_status_payment_refused>
 
 ========================================================================================================================================================================
+20130401
+
+1.alipay settings:
+[ALIPAY]
+[ALIPAY setting]
+Service type: standard double gateways
+gateway: www.alipay.com/cooperate/gateway.do
+partner id: 2088601071646094
+md5: wyb3uyfq1lttxywtqx40zc1nh7uhn7dy
+sales email: payment@juzine.com
+transport protocol: https/http
+new order: pending
+accept: complete
+reject: canceled
+contoury: all allowed countsries
+[ALIPAY setting]
+
+controllers:
+paymentcontroller.php->
+public function notifyAction()  for notify action()
+protected function saveInvoice(Mage_Sales_Model_Order $order)
+
+model:
+model/payment.php ->
+
+block:
+block/form.php
+block/redirect.php
+-only for onecheck page.
+
+/!!!/
+notify_url and notify function needs valid domain & ip to test.
+/!!!/
+[ALIPAY]
+
+[UNION PAY]
+quickpay_conf.php -> system.xml to setup initial variable!
+
+controller url:
+http://mo-commerce.com.dev/tmo-payment/unionpay_payment
+
+[UNION PAY]
+
+
+报文错误 (3000000)
+orderTime无效
+backEndUrl必填
+orderAmount无效
+
+110.00元
+
+array(8) { ["transType"]=> string(2) "01" ["orderAmount"]=> int(110.00) ["orderNumber"]=> string(17) "20130401174442452" ["orderTime"]=> string(14) "20130401174442" ["orderCurrency"]=> string(3) "156" ["customerIp"]=> string(9) "127.0.0.1" ["frontEndUrl"]=> string(44) "http://www.unionpay.com/exa/front_notify.php" ["backEndUrl"]=> string(43) "http://www.unionpay.com/exa/back_notify.php" }
+array(8) { ["transType"]=> string(2) "01" ["orderAmount"]=> int(1) ["orderNumber"]=> string(9) "100000013" ["orderTime"]=> string(14) "20130401163430" ["orderCurrency"]=> string(3) "156" ["customerIp"]=> string(9) "127.0.0.1" ["frontEndUrl"]=> string(64) "http://mo-commerce.com.dev/tmo-payment/unionpay_payment/success/" ["backEndUrl"]=> string(43) "http://www.unionpay.com/exa/back_notify.php" }
+
+array(8) { ["transType"]=> string(2) "01" ["orderAmount"]=> string(4) "0.01" ["orderNumber"]=> string(9) "100000013" ["orderTime"]=> string(19) "2013-04-01 16:34:30" ["orderCurrency"]=> string(3) "156" ["customerIp"]=> string(9) "127.0.0.1" ["frontEndUrl"]=> string(64) "http://mo-commerce.com.dev/tmo-payment/unionpay_payment/success/" ["backEndUrl"]=> string(43) "http://www.unionpay.com/exa/back_notify.php" }
+
+
+========================================================================================================================================================================
 
 OpenERP:https://www.openerp.com/en/
 TMO employees:

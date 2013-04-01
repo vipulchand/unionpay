@@ -5,7 +5,7 @@
 require_once('../quickpay_service.php');
 
 //下面这行用于测试，以生成随机且唯一的订单号
-mt_srand(quickpay_service::make_seed());
+//mt_srand(quickpay_service::make_seed());
 
 $param['transType']             = quickpay_conf::CONSUME;  //交易类型，CONSUME or PRE_AUTH
 
@@ -17,6 +17,7 @@ $param['orderCurrency']         = quickpay_conf::CURRENCY_CNY;  //交易币种�
 $param['customerIp']            = $_SERVER['REMOTE_ADDR'];  //用户IP
 $param['frontEndUrl']           = "http://www.unionpay.com/exa/front_notify.php";    //前台回调URL
 $param['backEndUrl']            = "http://www.unionpay.com/exa/back_notify.php";    //后台回调URL
+
 
 /* 可填空字段
    $param['commodityUrl']          = "http://www.example.com/product?name=商品";  //商品URL
