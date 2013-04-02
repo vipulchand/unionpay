@@ -6497,9 +6497,36 @@ Table: eav_attribute(Manage Attributes)->attributes of product
 Table: eav_attribute_set(Mange Attribute Sets)->save attribute set
 ->
 Table: catalog_product_entity_varchar/../../../->save the customed data
-
-
 [TMO PRODUCT]
+
+Ticks-Task:
+
+0000179: [com.everwines] Delivery Options & Fees: Import
+->Configuration -> shipping methods
+
+0000181: [com.everwines] CMS Navigation & Pages: Integrate Navigation Structure
+->
+Setup header navigation structure / pages:
+- About Everwines
+- Our Shops
+- Contact
+Setup footer navigation structure / pages:
+- Contact Info
+- Terms of Use
+- Privacy
+- Sitemap (see 0000183)
+- FAQ
+
+0000183: [com.everwines] CMS Navigation & Pages: Sitemap
+0000187: [com.everwines] CMS Navigation & Pages: Structured Module (FAQ/News/Events)
+
+0000175: [com.everwines] Payment Provider Integration: UnionPay
+
+0000157: e-commerce functionality - Product
+
+0000159: [com.everwines] Product Categorization: Filter-based Navigation
+0000161: [com.everwines] Product Catalog: Configure Product Attributes
+0000189: [com.everwines] Product Catalog: Import
 
 ========================================================================================================================================================================
 
