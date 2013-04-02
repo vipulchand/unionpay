@@ -158,3 +158,193 @@ Webaddress: http://www.magentocommerce.com/knowledge-base/entry/order-workflow/
 2. New Order -> Canceled
 3. New Order -> On Hold
 [Magento Order Workflow]
+
+
+[Basic Definition]
+1.Subtotal/小计   ¥0.01
+Price: 0.01
+Qty: 1
+Qty to invoice: 1
+->Subtotal: 0.01
+Tax Amount: 0.00
+Discount Amount: 0.00
+->Row Total: 0.01
+付款前得汇总
+
+2.Grand Total/累计   ¥0.01
+Subtotal - paid amount - refund amount - shipping amount - shipping refund = Order Grand Total
+[Basic Definition]
+
+[Sample Data]
+array(149) {
+["entity_id"]=> string(2) "22"
+["state"]=> string(3) "new"
+["status"]=> string(7) "pending"
+["coupon_code"]=> NULL
+["protect_code"]=> string(6) "858bc1"
+["shipping_description"]=> NULL
+["is_virtual"]=> string(1) "1"
+["store_id"]=> string(1) "1"
+["customer_id"]=> string(2) "13"
+["base_discount_amount"]=> string(6) "0.0000"
+["base_discount_canceled"]=> NULL
+["base_discount_invoiced"]=> NULL
+["base_discount_refunded"]=> NULL
+["base_grand_total"]=> string(6) "0.0100"
+["base_shipping_amount"]=> string(6) "0.0000"
+["base_shipping_canceled"]=> NULL
+["base_shipping_invoiced"]=> NULL
+["base_shipping_refunded"]=> NULL
+["base_shipping_tax_amount"]=> string(6) "0.0000"
+["base_shipping_tax_refunded"]=> NULL
+["base_subtotal"]=> string(6) "0.0100"
+["base_subtotal_canceled"]=> NULL
+["base_subtotal_invoiced"]=> NULL
+["base_subtotal_refunded"]=> NULL
+["base_tax_amount"]=> string(6) "0.0700"
+["base_tax_canceled"]=> NULL
+["base_tax_invoiced"]=> NULL
+["base_tax_refunded"]=> NULL
+["base_to_global_rate"]=> string(6) "1.0000"
+["base_to_order_rate"]=> string(6) "1.0000"
+["base_total_canceled"]=> NULL
+["base_total_invoiced"]=> NULL
+["base_total_invoiced_cost"]=> NULL
+["base_total_offline_refunded"]=> NULL
+["base_total_online_refunded"]=> NULL
+
+["base_total_paid"]=> NULL 100.0700
+
+["base_total_qty_ordered"]=> NULL
+["base_total_refunded"]=> NULL
+["discount_amount"]=> string(6) "0.0000"
+["discount_canceled"]=> NULL
+["discount_invoiced"]=> NULL
+["discount_refunded"]=> NULL
+
+["grand_total"]=> string(6) "100.0700"
+
+["shipping_amount"]=> string(6) "0.0000"
+["shipping_canceled"]=> NULL
+["shipping_invoiced"]=> NULL
+["shipping_refunded"]=> NULL
+["shipping_tax_amount"]=> string(6) "0.0000"
+["shipping_tax_refunded"]=> NULL
+["store_to_base_rate"]=> string(6) "1.0000"
+["store_to_order_rate"]=> string(6) "1.0000"
+["subtotal"]=> string(6) "0.0100"
+["subtotal_canceled"]=> NULL
+["subtotal_invoiced"]=> NULL
+["subtotal_refunded"]=> NULL
+
+["tax_amount"]=> string(6) "0.0700"
+
+["tax_canceled"]=> NULL
+["tax_invoiced"]=> NULL
+["tax_refunded"]=> NULL
+["total_canceled"]=> NULL
+["total_invoiced"]=> NULL
+["total_offline_refunded"]=> NULL
+["total_online_refunded"]=> NULL
+
+["total_paid"]=> NULL
+
+["total_qty_ordered"]=> string(6) "1.0000"
+["total_refunded"]=> NULL
+["can_ship_partially"]=> NULL
+["can_ship_partially_item"]=> NULL
+["customer_is_guest"]=> string(1) "0"
+["customer_note_notify"]=> string(1) "1"
+["billing_address_id"]=> string(2) "22"
+["customer_group_id"]=> string(1) "1"
+["edit_increment"]=> NULL
+["email_sent"]=> string(1) "1"
+["forced_shipment_with_invoice"]=> NULL
+["payment_auth_expiration"]=> NULL
+["quote_address_id"]=> NULL
+["quote_id"]=> string(3) "105"
+["shipping_address_id"]=> NULL
+["adjustment_negative"]=> NULL
+["adjustment_positive"]=> NULL
+["base_adjustment_negative"]=> NULL
+["base_adjustment_positive"]=> NULL
+["base_shipping_discount_amount"]=> string(6) "0.0000"
+["base_subtotal_incl_tax"]=> string(6) "0.0100"
+["base_total_due"]=> string(6) "0.0100"
+["payment_authorization_amount"]=> NULL
+["shipping_discount_amount"]=> string(6) "0.0000"
+["subtotal_incl_tax"]=> string(6) "0.0100"
+["total_due"]=> string(6) "0.0100" ["weight"]=> string(6) "0.0000"
+["customer_dob"]=> NULL
+["increment_id"]=> string(9) "100000022"
+["applied_rule_ids"]=> NULL
+["base_currency_code"]=> string(3) "CNY"
+["customer_email"]=> string(18) "aiuhio@outlook.com"
+["customer_firstname"]=> string(7) "Maxwell"
+["customer_lastname"]=> string(3) "Shi"
+["customer_middlename"]=> NULL
+["customer_prefix"]=> NULL
+["customer_suffix"]=> NULL
+["customer_taxvat"]=> NULL
+["discount_description"]=> NULL
+["ext_customer_id"]=> NULL
+["ext_order_id"]=> NULL
+["global_currency_code"]=> string(3) "CNY"
+["hold_before_state"]=> NULL
+["hold_before_status"]=> NULL
+["order_currency_code"]=> string(3) "CNY"
+["original_increment_id"]=> NULL
+["relation_child_id"]=> NULL
+["relation_child_real_id"]=> NULL
+["relation_parent_id"]=> NULL
+["relation_parent_real_id"]=> NULL
+["remote_ip"]=> string(9) "127.0.0.1"
+["shipping_method"]=> NULL
+["store_currency_code"]=> string(3) "CNY"
+["store_name"]=> string(31) "mo-commerce.com.dev Demo 中文"
+["x_forwarded_for"]=> NULL
+["customer_note"]=> NULL
+["created_at"]=> string(19) "2013-04-02 10:27:11"
+["updated_at"]=> string(19) "2013-04-02 10:27:15"
+["total_item_count"]=> string(1) "1"
+["customer_gender"]=> NULL
+["hidden_tax_amount"]=> string(6) "0.0000"
+["base_hidden_tax_amount"]=> string(6) "0.0000"
+["shipping_hidden_tax_amount"]=> string(6) "0.0000"
+["base_shipping_hidden_tax_amnt"]=> string(6) "0.0000"
+["hidden_tax_invoiced"]=> NULL
+["base_hidden_tax_invoiced"]=> NULL
+["hidden_tax_refunded"]=> NULL
+["base_hidden_tax_refunded"]=> NULL
+["shipping_incl_tax"]=> string(6) "0.0000"
+["base_shipping_incl_tax"]=> string(6) "0.0000"
+["coupon_rule_name"]=> NULL
+["paypal_ipn_customer_notified"]=> string(1) "0"
+["gift_message_id"]=> NULL
+["alipay_ipn_customer_notified"]=> string(1) "0"
+["affiliateplus_discount"]=> NULL
+["base_affiliateplus_discount"]=> NULL
+["groupdeals_coupon_from"]=> NULL
+["groupdeals_coupon_to"]=> NULL
+["groupdeals_coupon_to_email"]=> NULL
+["groupdeals_coupon_message"]=> NULL
+["wapalipay_ipn_customer_notified"]=> string(1) "0"
+["customer_mobile"]=> string(11) "18621798517"
+["payment_authorization_expiration"]=> NULL
+["forced_do_shipment_with_invoice"]=> NULL
+["base_shipping_hidden_tax_amount"]=> string(6) "0.0000" }
+[Sample Data]
+
+[MAGENTO TAX]
+Webaddress: http://www.magentocommerce.com/knowledge-base/entry/configuring-general-tax-settings
+[MAGENTO TAX]
+
+[MAGENTO UPDATE ORDER]
+Table:sales_flat_order
+Column:
+base_subtotal_invoiced
+base_tax_invoiced
+base_total_invoiced
+base_total_paid
+total_paid
+[MAGENTO UPDATE ORDER]

@@ -6467,8 +6467,8 @@ array(22) {
 [LOAD ORDER]
 $order = Mage::getModel('sales/order')->loadByIncrementId($arr_ret['orderNumber']);
 $order->getRealOrderId() //GET ORDER REAL ORDER ID
-
 [LOAD ORDER]
+->
 [UPDATE ORDER STATUS]
 $state = 'processing';
 $status = 'my_processing_status';
@@ -6477,6 +6477,12 @@ $isCustomerNotified = false;
 $order->setState($state, $status, $comment, $isCustomerNotified);
 $order->save();
 [UPDATE ORDER STATUS]
+
+Mage_Sales_Block_Order_Totals ->
+protected function _initTotals() work out $this->_totals
+
+IPS - International Payment Solutions, 环迅支付 in Chinese.
+
 
 ========================================================================================================================================================================
 
