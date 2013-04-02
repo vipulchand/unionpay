@@ -345,6 +345,8 @@ Column:
 base_subtotal_invoiced
 base_tax_invoiced
 base_total_invoiced
+
 base_total_paid
 total_paid
+
 [MAGENTO UPDATE ORDER]

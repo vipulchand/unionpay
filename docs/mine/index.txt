@@ -6483,6 +6483,23 @@ protected function _initTotals() work out $this->_totals
 
 IPS - International Payment Solutions, 环迅支付 in Chinese.
 
+[TMO BUG LISTS]
+1.have to enable free shipping
+2.tax
+
+[TMO BUG LISTS]
+
+[TMO PRODUCT]
+Tmo_Catalog_Model_Product
+->
+Table: eav_attribute(Manage Attributes)->attributes of product
+->
+Table: eav_attribute_set(Mange Attribute Sets)->save attribute set
+->
+Table: catalog_product_entity_varchar/../../../->save the customed data
+
+
+[TMO PRODUCT]
 
 ========================================================================================================================================================================
 
