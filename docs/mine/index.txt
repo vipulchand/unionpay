@@ -6259,6 +6259,11 @@ linux command:
 [MAGENTO LOG]
 Mage::log("WORKS!"); -> to save log in /var/log/system.log
 [MAGENTO LOG]
+[MAGENTO EXCEPTION]
+throw new Mage_Core_Exception(
+            '[tmo/payment/alipay/wap/model/payment] Unable to convert currency: Missing CNY conversion rate.'
+          );
+[MAGENTO EXCEPTION]
 
 [WAPALIPAY]
 Tmo_Wapalipay configure information in backend:
@@ -6428,6 +6433,50 @@ SMS: 111111
 Know Issue: update order status after payment.
 [UNION PAY]
 
+
+========================================================================================================================================================================
+20130402
+1.Update order status once payment successfully done.
+Response post array:
+array(22) {
+["charset"]=> string(5) "UTF-8"
+["cupReserved"]=> string(32) "{cardNumber=6212341111111111111}"
+["exchangeDate"]=> string(0) ""
+["exchangeRate"]=> string(0) ""
+["merAbbr"]=> string(24) "银联商城（公司）"
+["merId"]=> string(15) "105550149170027"
+["orderAmount"]=> string(1) "1"
+["orderCurrency"]=> string(3) "156"
+["orderNumber"]=> string(9) "100000022"
+["qid"]=> string(21) "201304021027155784112"
+["respCode"]=> string(2) "00"
+["respMsg"]=> string(12) "支付成功"
+["respTime"]=> string(14) "20130402102944"
+["settleAmount"]=> string(1) "1"
+["settleCurrency"]=> string(3) "156"
+["settleDate"]=> string(4) "0402"
+["signMethod"]=> string(3) "md5"
+["signature"]=> string(32) "d4ee8f6b26e8c8ca570c923b3a7e57e6"
+["traceNumber"]=> string(6) "578411"
+["traceTime"]=> string(10) "0402102715"
+["transType"]=> string(2) "01"
+["version"]=> string(5) "1.0.0" }
+->
+订单 100000022 支付成功
+
+[LOAD ORDER]
+$order = Mage::getModel('sales/order')->loadByIncrementId($arr_ret['orderNumber']);
+$order->getRealOrderId() //GET ORDER REAL ORDER ID
+
+[LOAD ORDER]
+[UPDATE ORDER STATUS]
+$state = 'processing';
+$status = 'my_processing_status';
+$comment = 'Changing state to Processing and status to My Processing Status';
+$isCustomerNotified = false;
+$order->setState($state, $status, $comment, $isCustomerNotified);
+$order->save();
+[UPDATE ORDER STATUS]
 
 ========================================================================================================================================================================
 
