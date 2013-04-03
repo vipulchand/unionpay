@@ -6533,17 +6533,66 @@ Setup footer navigation structure / pages:
 
 ========================================================================================================================================================================
 20130403
-0.
-Register bug:
-Account
+
+[MAGENTO STORE / WEBSITE]
+Process:
+0.Create new website & store in backend
+1.configuration
+2.web->set domain
+3.update index.php
+[MAGENTO STORE / WEBSITE]
+
+[MAGENTO NORMAL ORDER PROCESS]
+Weblink:
+1.ORDER(shipping method selected / amount.payment)
+state  : new
+status : pending
+2.Pay
+*3.Invoice after payment done./Update Total Paid at HERE
+state  : processing
+status : processing
+4.Shipping(Send out)
+state  : complete
+status : complete
+5. 订单取消
+state  : canceled
+status : canceled
+6. 订单关闭
+state  : closed
+status : closed
+7. 订单挂起
+state  : holded
+status : holded
+[MAGENTO NORMAL ORDER PROCESS]
+
+http://magento.com.dev/index.php/admin/sales_order/view/order_id/4/key/c582782ba9b9adad62668cef007cc8c8/
+http://magento.com.dev/index.php/admin/sales_order_invoice/new/order_id/4/key/6f8c4b81348bb4f7660f556db3739f68/
+<button style="" onclick="disableElements('submit-button');$('edit_form').submit()" class="scalable save submit-button" type="button" title="Submit Invoice" id="id_57ddacfa5d42a0b26a6f6f51a258b6d2">
+<span><span><span>Submit Invoice</span></span></span></button>
+
+
+0000181: [com.everwines] CMS Navigation & Pages: Integrate Navigation Structure
+Setup header navigation structure / pages:
+- About Everwines
+- Our Shops
+- Contact
+Setup footer navigation structure / pages:
+- Contact Info
+- Terms of Use
+- Privacy
+- Sitemap (see 0000183)
+- FAQ
+separated for English & Chinese.
+
 
 1.
 0000179: [com.everwines] Delivery Options & Fees: Import
 ->Configuration -> shipping methods
+-hold
 
 2.
 0000157: e-commerce functionality - Product
-
+-hold
 
 
 

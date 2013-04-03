@@ -350,3 +350,29 @@ base_total_paid
 total_paid
 
 [MAGENTO UPDATE ORDER]
+
+
+<config>
+    <modules>
+        <Inchoo_Invoicer>
+            <version>1.0.0.0</version>
+        </Inchoo_Invoicer>
+    </modules>
+    <global>
+        <models>
+            <inchoo_invoicer>
+                <class>Inchoo_Invoicer_Model</class>
+            </inchoo_invoicer>
+        </models>
+        <events>
+            <sales_order_save_after>
+                <observers>
+                    <inchoo_invoicer_automatically_complete_order>
+                        <class>inchoo_invoicer/observer</class>
+                        <method>automaticallyInvoiceShipCompleteOrder</method>
+                    </inchoo_invoicer_automatically_complete_order>
+                </observers>
+            </sales_order_save_after>
+        </events>
+    </global>
+</config>
