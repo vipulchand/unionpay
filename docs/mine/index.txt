@@ -6484,9 +6484,7 @@ protected function _initTotals() work out $this->_totals
 IPS - International Payment Solutions, 环迅支付 in Chinese.
 
 [TMO BUG LISTS]
-1.have to enable free shipping
-2.tax
-
+1.tax
 [TMO BUG LISTS]
 
 [TMO PRODUCT]
@@ -6565,11 +6563,24 @@ state  : holded
 status : holded
 [MAGENTO NORMAL ORDER PROCESS]
 
+About Invoice:
 http://magento.com.dev/index.php/admin/sales_order/view/order_id/4/key/c582782ba9b9adad62668cef007cc8c8/
 http://magento.com.dev/index.php/admin/sales_order_invoice/new/order_id/4/key/6f8c4b81348bb4f7660f556db3739f68/
 <button style="" onclick="disableElements('submit-button');$('edit_form').submit()" class="scalable save submit-button" type="button" title="Submit Invoice" id="id_57ddacfa5d42a0b26a6f6f51a258b6d2">
 <span><span><span>Submit Invoice</span></span></span></button>
 
+[NOTIFY URL]
+notify_url.php ->
+before confirm action must to do notify_verify()
+public function confirmAction() {
+if (!$this->getRequest()->isPost())
+{
+    $this->_redirect('');
+    return;
+    }
+    Mage::getSingleton('alipay/payment')->confirmPayment($this->getRequest()->getPost());
+    }
+<span notify="q" url=""></span>
 
 0000181: [com.everwines] CMS Navigation & Pages: Integrate Navigation Structure
 Setup header navigation structure / pages:
@@ -6584,6 +6595,10 @@ Setup footer navigation structure / pages:
 - FAQ
 separated for English & Chinese.
 
+header navigation structure / pages? ->
+frontend -> nav container
+nav container clearer show-bg
+
 
 1.
 0000179: [com.everwines] Delivery Options & Fees: Import
@@ -6593,7 +6608,6 @@ separated for English & Chinese.
 2.
 0000157: e-commerce functionality - Product
 -hold
-
 
 
 ========================================================================================================================================================================
