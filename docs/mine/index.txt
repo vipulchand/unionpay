@@ -6501,6 +6501,14 @@ Table: catalog_product_entity_varchar/../../../->save the customed data
 
 Ticks-Task:
 
+0000157: e-commerce functionality - Product
+
+0000159: [com.everwines] Product Categorization: Filter-based Navigation
+
+0000161: [com.everwines] Product Catalog: Configure Product Attributes
+
+0000175: [com.everwines] Payment Provider Integration: UnionPay
+
 0000179: [com.everwines] Delivery Options & Fees: Import
 ->Configuration -> shipping methods
 
@@ -6518,15 +6526,26 @@ Setup footer navigation structure / pages:
 - FAQ
 
 0000183: [com.everwines] CMS Navigation & Pages: Sitemap
+
 0000187: [com.everwines] CMS Navigation & Pages: Structured Module (FAQ/News/Events)
 
-0000175: [com.everwines] Payment Provider Integration: UnionPay
+0000189: [com.everwines] Product Catalog: Import
 
+========================================================================================================================================================================
+20130403
+0.
+Register bug:
+Account
+
+1.
+0000179: [com.everwines] Delivery Options & Fees: Import
+->Configuration -> shipping methods
+
+2.
 0000157: e-commerce functionality - Product
 
-0000159: [com.everwines] Product Categorization: Filter-based Navigation
-0000161: [com.everwines] Product Catalog: Configure Product Attributes
-0000189: [com.everwines] Product Catalog: Import
+
+
 
 ========================================================================================================================================================================
 
