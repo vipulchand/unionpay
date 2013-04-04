@@ -1,0 +1,42 @@
+windows/ubuntu 文件共享之 Samba 配置
+webaddress:
+http://www.cnblogs.com/foxhengxing/archive/2010/08/14/1799774.html
+
+安装samba
+sudo apt-get install samba
+sudo apt-get install smbfs
+
+代码:
+workgroup = WORKGROUP
+display charset = UTF-8
+unix charset = UTF-8
+dos charset = cp936
+现在要添加testshare这个网络访问帐户。如果系统中当前没有这个帐户，那么
+代码:
+sudo useradd testshare
+要注意，上面只是增加了testshare 这个用户，却没有给用户赋予本机登录密码。所以这个用户将只能从远程访问，不能从本机登录。而且samba的登录密码可以和本机登录密码不一样。
+现在要新增网络使用者的帐号：
+代码:
+sudo smbpasswd -a testshare  ，然后输入密码123456
+sudo gedit /etc/samba/smbusers
+在新建立的文件内加入下面这一行并保存
+代码:
+testshare= "network username"
+重启一下 smbd
+sudo service smbd restart
+看一下smbd监听的端口，如果有显示相应的端口就代表启动了
+netstat -tlnp |grep smb
+假设windows的共享目录为test,将其挂载到/mnt/winshare
+mkdir  /mnt/winshare
+mount   -t   smbfs   -o   username=XXX,password=’pwd’   //169.254.191.56/test   /mnt/winshare
+
+============================================================================================================================================================
+
+eclipse EE get JPA lib throw error  MOZILLA_FIVE_HOME not set
+https://launchpad.net/ubuntu/oneiric/amd64/xulrunner-1.9.2/1.9.2.17+build3+nobinonly-0ubuntu1
+Download and install Xulrunner deb package from the Launchpad page above
+Add -Dorg.eclipse.swt.browser.XULRunnerPath=/usr/lib/xulrunner-1.9.2.17 option to your eclipse.ini (AptanaStudio3.ini)
+
+============================================================================================================================================================
+
+
