@@ -257,20 +257,36 @@ make install 之后系统会提示你mcrypt.so文件所在的目录。
 PHP中如何安装 Mhash扩展库？
 http://www.zhujiangroad.com/html/soft/s3110.html
 
-需要准备的软件:
-drupal desktop
-
-frontend
-backend
-
-======================================================================================================================================================================
-20130311
-1.sms-afterinvoice
+========================================================================================================================================
+How to Install Ubuntu 12.10 In Macbook Air
+Webaddress:
+http://www.maketecheasier.com/install-ubuntu-12-10-in-macbook-air/2012/11/08
+1.create dmg disk from iso
+hdiutil convert -format UDRW -o ~/path/to/ubuntu-12.10-desktop-amd64+mac.img ~/path/to/ubuntu-12.10-desktop-amd64+mac.iso
+2.
+diskutil list
+3.
+diskutil unmountDisk /dev/diskX
+4.
+Run the following command to create the USB Installer:
+sudo dd if=/path/to/ubuntu-12.10-desktop-amd64+mac.img of=/dev/rdiskX bs=1m
+5.
+diskutil eject /dev/diskX
+6.
+install rEFit
+7.
+Run gdisk. We intend to manually create a new hybrid MBR.
 ->
-tmogroup->customproduct
-tmogroup->sms
+->sudo gdisk /dev/disk0
+->Choose 'r' to repair and 'o' and 'p' to see current setup. Later you will need to refer to the current set-up.
+->Choose 'h' to build a new hybrid MBR.
+->For my set-up, I chose partitions "2 3 4" which correspond to "Mac OS", "Recovery HD", and "Linux-Root," respectively. Linux-Root should be the partition that contains the grub boot data. Also, if you are not on Mac OS X Lion, you won't(?) have the "Recovery HD" partition.
+->Accept the default/recommended placement of EFI. This will add another partition to the selected three; hMBR has a maximum of four.
+->For all but the Linux-Root, accept the defaults and always choose 'N' for not boot. For Linux-Root (the fourth for me), choose "83" (fs-type: Linux) and 'Y' to boot. (*)
+->Choose 'o' to verify and 'w' to write.
+To fix the 30sec hang at tux (not a necessary step in repairing hybrid MBR):
+->sudo bless --device /dev/disk0s4 --setBoot --legacy --verbose
+->go into -> x -> o
+========================================================================================================================================
 
-
-
-2.alipay-payment
 
