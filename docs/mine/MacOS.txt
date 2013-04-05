@@ -242,6 +242,8 @@ echo $PATH
 3.进入php-5.3.15/ext/mcrypt执行phpize -> ./configure -> make -> make install
 4.apachectl restart
 
+apt-get install php-pear /pear and pecl
+
 使用php的常见问题是：编译php时忘记添加某扩展，后来想添加扩展，但是因为安装php后又装了一些东西如PEAR等，不想删除目录重装，于是可以采用phpize。方法是：
 要有与现有php完全相同的php压缩包。我用的是php-5.2.6.tar.gz。 展开后进入里面的ext/mcrypt目录(里面是mcrypt的php扩展)，然后执行/usr/local/php/bin/phpize。phpize是安装php时安装好的一个工具，如果你的机器没有安装phpize工具，那么可能还是要make,make install php，仅仅为了得到phpize.
 执行完后，会发现当前目录下多了一些configure文件， 如果没报错，则根据提示运行
@@ -289,4 +291,5 @@ To fix the 30sec hang at tux (not a necessary step in repairing hybrid MBR):
 ->go into -> x -> o
 ========================================================================================================================================
 
+/home/maxwell/docs/php-5.4.6/ext/mysqlnd/mysqlnd.h
 
