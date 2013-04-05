@@ -293,3 +293,10 @@ To fix the 30sec hang at tux (not a necessary step in repairing hybrid MBR):
 
 /home/maxwell/docs/php-5.4.6/ext/mysqlnd/mysqlnd.h
 
+========================================================================================================================================
+
+Show hidden files in Finder
+
+In the Terminal type:
+defaults write com.apple.finder AppleShowAllFiles TRUE
+killall Finder
