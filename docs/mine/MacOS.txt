@@ -300,3 +300,27 @@ Show hidden files in Finder
 In the Terminal type:
 defaults write com.apple.finder AppleShowAllFiles TRUE
 killall Finder
+
+
+========================================================================================================================================
+PPC boot from openframe
+1.
+Command-Option-O-F
+2.
+printenv boot-device
+3.
+setenv boot-device ud:3,:tbxi
+4.
+mac-boot
+5.
+Type dev / ls to get the device tree list. 
+6.
+devalias ud /pci@f2000000/usb@1b,1/disk@1
+devalias hd /pci@f4000000/ata-6@d/disk@0
+7.
+dir ud:,\
+dir hd:,\
+8.
+boot ud:,\install\yaboot
+
+ 
