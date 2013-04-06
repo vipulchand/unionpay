@@ -241,3 +241,19 @@ configure: error: libpng.(a|so) not found.
 如果出现:configure: error: sasl.h not found!
 安装:  apt-get install libsasl2-dev
 
+==========================================================================================================================
+install libmemcached
+
+apt-get install libevent-dev
+apt-get install libmemcached-dev
+
+ 执行时会报错：libmemcached.so.10: cannot open shared object file: No such file or director
+ 原因是 libmemcached.so.10 被安装到了 /usr/local/lib下，而共享库默认位置是 /usr/lib 网上说可以把目录 /usr/local/lib 设置到环境变量，但我设置完后不起作用。
+ 于是用建立一个链接： ln /usr/local/lib/libmemcached.so.10  /usr/lib/libmemcached.so.10
+
+==========================================================================================================================
+
+install xdebug
+sudo apt-get install php-pear
+sudo apt-get install php5-dev
+sudo pecl install xdebug
