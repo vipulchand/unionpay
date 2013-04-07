@@ -257,3 +257,7 @@ install xdebug
 sudo apt-get install php-pear
 sudo apt-get install php5-dev
 sudo pecl install xdebug
+
+==========================================================================================================================
+for update:
+apt-get install -f
