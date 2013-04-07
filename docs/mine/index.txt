@@ -6581,6 +6581,143 @@ if (!$this->getRequest()->isPost())
     Mage::getSingleton('alipay/payment')->confirmPayment($this->getRequest()->getPost());
     }
 <span notify="q" url=""></span>
+[NOTIFY URL]
+
+========================================================================================================================================================================
+Zend studio:
+http://www.geekso.com/component/zendstudio-downloads/
+
+========================================================================================================================================================================
+20130407
+
+[MAGE REWRITE]
+BLOCK:
+<blocks>
+      <tmo_page>
+        <class>Tmo_Page_Block</class>
+      </tmo_page>
+      <!-- rewrite block:html_header -->
+        <page>
+        <rewrite>
+        <html_header>Tmo_Page_Block_Html_Header</html_header>
+        </rewrite>
+        </page>
+</blocks>
+
+HELPER:
+<helpers>
+      <tmo_page>
+        <class>Tmo_Page_Helper</class>
+      </tmo_page>
+      <!-- rewrite data -->
+      <page>
+        <rewrite>
+          <data>Tmo_Page_Data</data>
+        </rewrite>
+      </page>
+</helpers>
+
+MODEL:
+<models>
+      <paypal>
+        <rewrite>
+          <standard>Tmo_Payment_Paypal_Model_Standard</standard>
+          <config>Tmo_Payment_Paypal_Model_Config</config>
+          <ipn>Tmo_Payment_Paypal_Model_Ipn</ipn>
+        </rewrite>
+      </paypal>
+</models>
+
+Adminhtml:
+<blocks>
+      <tmo_adminhtml>
+        <class>Tmo_Adminhtml_Block</class>
+      </tmo_adminhtml>
+      <adminhtml>
+        <rewrite>
+          <catalog_product_grid>Tmo_Adminhtml_Block_Catalog_Product_Grid</catalog_product_grid>
+          <catalog_product_edit>Tmo_Adminhtml_Block_Catalog_Product_Edit</catalog_product_edit>
+          <catalog_product_edit_tabs>Tmo_Adminhtml_Block_Catalog_Product_Edit_Tabs</catalog_product_edit_tabs>
+          <catalog_product_edit_tab_categories>Tmo_Adminhtml_Block_Catalog_Product_Edit_Tab_Categories</catalog_product_edit_tab_categories>
+          <catalog_product_edit_tab_settings>Tmo_Adminhtml_Block_Catalog_Product_Edit_Tab_Settings</catalog_product_edit_tab_settings>
+          <catalog_product_edit_tab_websites>Tmo_Adminhtml_Block_Catalog_Product_Edit_Tab_Websites</catalog_product_edit_tab_websites>
+          <cms_page_grid_renderer_action>Tmo_Adminhtml_Block_Cms_Page_Grid_Renderer_Action</cms_page_grid_renderer_action>
+          <sales_order_grid>Tmo_Adminhtml_Block_Sales_Order_Grid</sales_order_grid>
+          <store_switcher>Tmo_Adminhtml_Block_Store_Switcher</store_switcher>
+          <system_store_edit_form>Tmo_Adminhtml_Block_System_Store_Edit_Form</system_store_edit_form>
+        </rewrite>
+      </adminhtml>
+</blocks>
+
+Controllers:
+<!-- Admin Router -->
+  <admin>
+    <routers>
+      <adminhtml>
+        <args>
+          <modules>
+            <max_customer before="Mage_Adminhtml">Max_Customer_Adminhtml</max_customer>
+          </modules>
+        </args>
+      </adminhtml>
+    </routers>
+</admin>
+
+require_once dirname(__FILE__).'/../../../../../core/Mage/Adminhtml/controllers/CustomerController.php';
+class Max_Customer_Adminhtml_CustomerController extends Mage_Adminhtml_CustomerController
+[MAGE REWRITE]
+
+[PHP FUNCTION]
+$pizza  = "piece1 piece2 piece3 piece4 piece5 piece6";
+$pieces = explode(" ", $pizza);
+
+$os = array("Mac", "NT", "Irix", "Linux");
+if (in_array("Irix", $os)) {
+    echo "Got Irix";
+}
+
+[PHP FUNCTION]
+
+[MAGENTO BLOCK]
+1.work out block in /block/ with template in /design/ folder ....
+2.add the block into layout.xml
+3.call the block in the template
+<?= $this->getChildHtml('bnew')?>
+->
+
+<block type="page/html_header" name="header" as="header">
+                <block type="page/template_links" name="top.links" as="topLinks"/>
+                <block type="page/switch" name="store_language" as="store_language" template="page/switch/languages.phtml"/>
+                <block type="core/text_list" name="top.menu" as="topMenu" translate="label">
+                    <label>Navigation Bar</label>
+                    <block type="page/html_topmenu" name="catalog.topnav" template="page/html/topmenu.phtml"/>
+                </block>
+                <block type="page/html_wrapper" name="top.container" as="topContainer" translate="label">
+                    <label>Page Header</label>
+                    <action method="setElementClass"><value>top-container</value></action>
+                </block>
+</block>
+
+$layout = Mage::getSingleton('core/layout');
+$block = $layout->createBlock('Mage_Page_Block_Html_Header');
+$block->setTemplate('page/html/header.phtml');
+echo $block->renderView();
+
+<?php echo $this->getChildHtml('topLinks') ?>
+
+Static Blocks:
+1.create static blocks in cms backend
+2.add the block into layout.xml
+<block type="cms/block" name="bnew"><action method="setBlockId"><block_id>bnew</block_id></action></block>
+btw.name is name,id is id
+3.call the block in the template
+<?= $this->getChildHtml('bnew')?>
+,
+
+add your own widget templates to widget options
+http://magebase.com/magento-tutorials/add-your-own-widget-templates-to-widget-options/
+
+[MAGENTO BLOCK]
 
 0000181: [com.everwines] CMS Navigation & Pages: Integrate Navigation Structure
 Setup header navigation structure / pages:
@@ -6599,7 +6736,6 @@ header navigation structure / pages? ->
 frontend -> nav container
 nav container clearer show-bg
 
-
 1.
 0000179: [com.everwines] Delivery Options & Fees: Import
 ->Configuration -> shipping methods
@@ -6608,11 +6744,6 @@ nav container clearer show-bg
 2.
 0000157: e-commerce functionality - Product
 -hold
-
-
-========================================================================================================================================================================
-Zend studio:
-http://www.geekso.com/component/zendstudio-downloads/
 
 ========================================================================================================================================================================
 
