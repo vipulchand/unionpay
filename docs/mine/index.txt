@@ -6712,6 +6712,10 @@ Static Blocks:
 btw.name is name,id is id
 3.call the block in the template
 <?= $this->getChildHtml('bnew')?>
+
+unsetChild
+<action method="unsetChild"><name>cart_sidebar</name></action>
+
 ,
 
 add your own widget templates to widget options
@@ -6732,9 +6736,9 @@ Setup footer navigation structure / pages:
 - FAQ
 separated for English & Chinese.
 
-header navigation structure / pages? ->
-frontend -> nav container
-nav container clearer show-bg
+1.work out the page layout
+1.1.header
+1.2.
 
 1.
 0000179: [com.everwines] Delivery Options & Fees: Import
@@ -6744,6 +6748,134 @@ nav container clearer show-bg
 2.
 0000157: e-commerce functionality - Product
 -hold
+
+========================================================================================================================================================================
+20130408
+
+Frondend develope reference:
+http://shop.linlinwang.com/
+http://www.linlinwang.com/
+http://www.lvhezi.com/
+
+CMS Setup Sql: /app/code/core/mage/cms/data/cms_setup/data-upgrade-1.6.0.0.0-16.0.0.1.php
+
+[Add CMS page links to top navigation in magento]
+web address:
+http://www.atwix.com/magento/how-to-add-a-new-item-to-the-navigation-menu/
+Original method:
+1.
+app/design/frontend/base/template/catalog/navigation/top.phtml
+2.
+app/design/frontend/default/YourThemeName/template/catalog/navigation/top.phtml
+->
+<?php $_menu = $this->renderCategoriesMenuHtml(0,'level-top') ?>
+<?php if($_menu): ?>
+<div class="nav-container">
+    <ul id="nav">
+<li><a href="/">Home</a><li>
+<?php echo $_menu ?>
+    </ul>
+</div>
+<?php endif ?>
+->
+<?php if($_menu): ?>
+<div class="nav-container">
+    <ul id="nav">
+<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('navbar_links1')->toHtml() ?>
+        <?php echo $_menu ?>
+<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('navbar_links2')->toHtml() ?>
+    </ul>
+</div>
+<?php endif ?>
+->
+CMS -> Static Block -> Add New Block
+navbar_links1
+<li><a href="{ {store url=""} }"><span>Home</span></a></li>
+<li><a href="{ {store url="introduction"} }"><span>Introduction</span></a></li>
+->
+app/design/frontend/base/template/page/html/topmenu.phtml
+app/design/frontend/default/YourTemplateName/template/page/html/topmenu.phtml
+
+tmo_page.xml
+<?xml version="1.0"?>
+<layout version="0.1.0">
+  <default>
+    <reference name="top.menu">
+      <block type="tmo_page/navigation" name="newmenu.topnav" template="page/html/topmenu.phtml">
+      </block>
+    </reference>
+  </default>
+</layout>
+
+,
+
+<li class="level0 nav-1 level-top first last">
+<a class="level-top" href="http://everwines.com.dev/evesub.html">
+<span>evesub</span>
+</a>
+</li>
+
+,
+
+$this->getChildHtml('preface') the side show
+->
+	<cms_index_index>
+		<reference name="preface">
+			<block type="ultraslideshow/slideshow" name="ultraslideshow" as="ultraslideshow" template="infortis/ultraslideshow/slideshow.phtml" before="-">
+				<block type="ultraslideshow/config" name="ultraslideshow.config" as="slideshowConfig" template="infortis/ultraslideshow/config.phtml" />
+			</block>
+		</reference>
+    </cms_index_index>
+</layout>
+->
+in backend :
+/local/infortis/ultraslideshow/etc/config.xml
+<blocks>block_slide1,block_slide2,block_slide3</blocks>
+1.above block_slide1 .... is static block
+2.url broken
+3.
+->
+<reference name="preface">
+			<block type="cms/block" name="block_home_preface">
+                <action method="setBlockId"><block_id>block_home_preface</block_id></action>
+            </block>
+		</reference>
+{{block type="brands/brands" block_name="Product Brands" template="infortis/brands/brand_slider.phtml"}}
+->
+
+[Extend CMS]
+
+See attached file for schematic implementation as well as
+- Tmo_Cms_Helper_Data#displayBlocks (template helper to fetch & display location specific blocks - can be implemented similar for navigation)
+- app/design/frontend/ultimo/tmo/template/cms/content.phtml (exemplary placeholder template for above template helper)
+
+table:
+0.cms_page
+1.cms_block
+2.widget_instance
+3.poll
+
+cms_block: Add 3 more columns:
+1.location
+2.position
+3.area
+
+design/adminhtml/default/default/layout/catalog.xml
+
+<adminhtml_catalog_category_edit>
+        <update handle="editor"/>
+        <reference name="left">
+            <block name="category.tree" type="adminhtml/catalog_category_tree" template="catalog/category/tree.phtml" />
+        </reference>
+        <reference name="content">
+            <block name="category.edit"  type="adminhtml/catalog_category_edit" template="catalog/category/edit.phtml" />
+        </reference>
+        <reference name="js">
+            <block type="core/template" template="catalog/wysiwyg/js.phtml" name="catalog.wysiwyg.js" />
+        </reference>
+    </adminhtml_catalog_category_edit>
+
+[Extend CMS]
 
 ========================================================================================================================================================================
 
