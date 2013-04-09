@@ -261,3 +261,13 @@ sudo pecl install xdebug
 ==========================================================================================================================
 for update:
 apt-get install -f
+
+4、让apache、php支持mysql
+ sudo apt-get install libapache2-mod-auth-mysql
+ sudo apt-get install php5-mysql
+
+sina weibo:
+ http://developer.51cto.com/art/201109/293597.htm
+ 
+ 
+ 
