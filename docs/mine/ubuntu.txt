@@ -270,4 +270,7 @@ sina weibo:
  http://developer.51cto.com/art/201109/293597.htm
  
  
- 
+ 4.让Ubuntu开机自动启动apache.
+ 1). 复制 /usr/server/apache2/bin/apachectl到/etc/init.d
+ 2). 加载为服务
+     sudo update-rc.d apachectl defaults
