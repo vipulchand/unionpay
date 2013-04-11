@@ -7025,8 +7025,24 @@ mpdel/resource/xx extends zz
 
 1.add new type of eva id =9
 2.
-CREATE TABLE IF NOT EXISTS `cms_navigation_entity` (
-  `entity_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Entity ID',
+
+relationship table:
+tmo_cms_navigation_pages
+
+CREATE TABLE IF NOT EXISTS `tmo_cms_navigation_pages` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Id',
+  `navigation_id` int(10) unsigned DEFAULT NULL COMMENT 'CMS Navigation Id',
+  `page_id` int(10) unsigned DEFAULT NULL COMMENT 'CMS Page Id',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_navigation_id_page_id` (`navigation_id`,`page_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='tmo_cms_navigation_pages';
+
+
+main navigation table:
+
+CREATE TABLE IF NOT EXISTS `tmo_cms_navigation_entity` (
+  `navigation_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Entity ID',
+  `root_navigation_id` varchar(255) NULL COMMENT 'Root Navigation Id',
   `entity_type_id` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT 'Entity Type ID',
   `attribute_set_id` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT 'Attriute Set ID',
   `parent_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Parent Category ID',
@@ -7036,10 +7052,21 @@ CREATE TABLE IF NOT EXISTS `cms_navigation_entity` (
   `position` int(11) NOT NULL COMMENT 'Position',
   `level` int(11) NOT NULL DEFAULT '0' COMMENT 'Tree Level',
   `children_count` int(11) NOT NULL COMMENT 'Child Count',
-  PRIMARY KEY (`entity_id`),
-  KEY `IDX_CATALOG_CATEGORY_ENTITY_LEVEL` (`level`),
-  KEY `IDX_CATALOG_CATEGORY_ENTITY_PATH_ENTITY_ID` (`path`,`entity_id`)
+
+  `content_type_id` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT 'Content Type ID',
+  `exact_id` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT 'Exact Content ID',
+  `content` text NULL DEFAULT NULL COMMENT 'Content',
+
+  `name` varchar(255) NOT NULL COMMENT 'Name',
+  `alias` varchar(255) NULL COMMENT 'Rewrite URL',
+  `area` int(11) NOT NULL COMMENT 'Area',
+  `section` int(11) NOT NULL COMMENT 'Section',
+
+  PRIMARY KEY (`navigation_id`),
+  KEY `IDX_TMO_CMS_NAVIGATION_ENTITY_LEVEL` (`level`),
+  KEY `IDX_TMO_CMS_NAVIGATION_ENTITY_PATH_NAVIGATION_ID` (`path`,`navigation_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='CMS Navigation Table' ;
+
 3.
 CREATE TABLE IF NOT EXISTS `cms_eav_attribute` (
   `attribute_id` smallint(5) unsigned NOT NULL COMMENT 'Attribute ID',
@@ -7108,6 +7135,35 @@ $storeGroup_->setRootCategoryId($rootCategory->getId());
 $storeGroup_->save();
 
 eav_attribute_group(EAV_ATTRIBUTE_GROUP) -> attribute_set_id（EAV_ATTRIBUTE_SET） -> entity_type_id (EAV_ENTITY_TYPE)
+
+
+
+========================================================================================================================================================================
+20130410
+0.
+Mage_Core_Model_Store -> getRootCategoryId
+1.structure checking-done.
+2.database/table check
+table: core_store_group -> root_category_id -> from "catalog_category_entity"'s id
+check done:
+`entity_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Entity ID',
+->
+get root category id and SET it to root navigation id
+->
+/local/tmo/core/helper/data.php
+public function setupStoreGroup(Mage_Core_Model_Store_Group $storeGroup_)
+
+
+3.
+sample case of relationship:
+
+$rootNavigation= new Tmo_Cms_Model_Navigation();
+$rootNavigation->setPath(1);
+$rootNavigation->setRootNavigationId(1);
+$rootNavigation->save(array('entity_type_id'=>1,'pages'=>array('333'),'parent'=>19));
+
+parent_id = 0 at initial
+
 
 ========================================================================================================================================================================
 
