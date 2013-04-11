@@ -7042,7 +7042,7 @@ main navigation table:
 
 CREATE TABLE IF NOT EXISTS `tmo_cms_navigation_entity` (
   `navigation_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Entity ID',
-  `root_navigation_id` varchar(255) NULL COMMENT 'Root Navigation Id',
+  `root_navigation_id` varchar(255) DEFAULT NULL COMMENT 'Root Navigation Id',
   `entity_type_id` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT 'Entity Type ID',
   `attribute_set_id` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT 'Attriute Set ID',
   `parent_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Parent Category ID',
@@ -7052,20 +7052,23 @@ CREATE TABLE IF NOT EXISTS `tmo_cms_navigation_entity` (
   `position` int(11) NOT NULL COMMENT 'Position',
   `level` int(11) NOT NULL DEFAULT '0' COMMENT 'Tree Level',
   `children_count` int(11) NOT NULL COMMENT 'Child Count',
-
   `content_type_id` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT 'Content Type ID',
   `exact_id` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT 'Exact Content ID',
-  `content` text NULL DEFAULT NULL COMMENT 'Content',
-
+  `content` text COMMENT 'Content',
   `name` varchar(255) NOT NULL COMMENT 'Name',
-  `alias` varchar(255) NULL COMMENT 'Rewrite URL',
+  `alias` varchar(255) DEFAULT NULL COMMENT 'Rewrite URL',
   `area` int(11) NOT NULL COMMENT 'Area',
   `section` int(11) NOT NULL COMMENT 'Section',
-
   PRIMARY KEY (`navigation_id`),
   KEY `IDX_TMO_CMS_NAVIGATION_ENTITY_LEVEL` (`level`),
   KEY `IDX_TMO_CMS_NAVIGATION_ENTITY_PATH_NAVIGATION_ID` (`path`,`navigation_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='CMS Navigation Table' ;
+
+INSERT INTO `tmo_cms_navigation_entity` (`navigation_id`, `root_navigation_id`, `entity_type_id`, `attribute_set_id`, `parent_id`, `created_at`, `updated_at`, `path`, `position`, `level`, `children_count`, `content_type_id`, `exact_id`, `content`, `name`, `alias`, `area`, `section`) VALUES
+(1, NULL, 0, 0, 0, '2013-04-09 16:00:00', '2013-04-10 16:00:00', '1', 0, 0, 1000, 0, 0, NULL, '', NULL, 0, 0),
+(26, '42', 0, 0, 1, '2013-04-10 11:05:57', '2013-04-10 11:05:57', '1/26', 7, 1, 2, 0, 0, NULL, 'everwines', NULL, 0, 0),
+(29, NULL, 0, 0, 26, '0000-00-00 00:00:00', NULL, '1/26/29', 1, 2, 1, 0, 0, NULL, 'abc', NULL, 0, 0);
+
 
 3.
 CREATE TABLE IF NOT EXISTS `cms_eav_attribute` (
@@ -7163,6 +7166,25 @@ $rootNavigation->setRootNavigationId(1);
 $rootNavigation->save(array('entity_type_id'=>1,'pages'=>array('333'),'parent'=>19));
 
 parent_id = 0 at initial
+
+
+========================================================================================================================================================================
+20130411
+1.magento tree node has some special rule:
+INSERT INTO `tmo_cms_navigation_entity` (`navigation_id`, `root_navigation_id`, `entity_type_id`, `attribute_set_id`, `parent_id`, `created_at`, `updated_at`, `path`, `position`, `level`, `children_count`, `content_type_id`, `exact_id`, `content`, `name`, `alias`, `area`, `section`) VALUES
+(1, NULL, 0, 0, 0, '2013-04-09 16:00:00', '2013-04-10 16:00:00', '1', 0, 0, 1000, 0, 0, NULL, '', NULL, 0, 0),
+(26, '42', 0, 0, 1, '2013-04-10 11:05:57', '2013-04-10 11:05:57', '1/26', 7, 1, 2, 0, 0, NULL, 'everwines', NULL, 0, 0),
+(29, NULL, 0, 0, 26, '0000-00-00 00:00:00', NULL, '1/26/29', 1, 2, 1, 0, 0, NULL, 'abc', NULL, 0, 0);
+
+sample navigation function:
+/local/tmo/page/block/navigation.php
+
+2.continue to finish the tree
+2.1.display - ajax
+2.2.update
+
+$navigationId = (int) $this->getRequest()->getParam('id',false);
+
 
 
 ========================================================================================================================================================================
