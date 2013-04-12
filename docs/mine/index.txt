@@ -7170,13 +7170,30 @@ parent_id = 0 at initial
 
 ========================================================================================================================================================================
 20130411
+
+[asia.tmogroup.ldap]
+Make sure the key is not accessible to other users
+chmod 400 ~/.ssh/asia.tmogroup-firstname.lastname
+,
+Register the key (for better integration / comfortable usage)
+ssh-add ~/.ssh/asia.tmogroup-firstname.lastname
+,
+[asia.tmogroup.ldap]
+
+[asia.tmogroup.xmpp]
+The service is powered by Openfire, a Java-based XMPP server.
+http://en.wikipedia.org/wiki/Openfire
+http://www.igniterealtime.org/projects/spark/
+https://xmpp.tmogroup.asia/
+[asia.tmogroup.xmpp]
+
 1.magento tree node has some special rule:
 INSERT INTO `tmo_cms_navigation_entity` (`navigation_id`, `root_navigation_id`, `entity_type_id`, `attribute_set_id`, `parent_id`, `created_at`, `updated_at`, `path`, `position`, `level`, `children_count`, `content_type_id`, `exact_id`, `content`, `name`, `alias`, `area`, `section`) VALUES
 (1, NULL, 0, 0, 0, '2013-04-09 16:00:00', '2013-04-10 16:00:00', '1', 0, 0, 1000, 0, 0, NULL, '', NULL, 0, 0),
 (26, '42', 0, 0, 1, '2013-04-10 11:05:57', '2013-04-10 11:05:57', '1/26', 7, 1, 2, 0, 0, NULL, 'everwines', NULL, 0, 0),
 (29, NULL, 0, 0, 26, '0000-00-00 00:00:00', NULL, '1/26/29', 1, 2, 1, 0, 0, NULL, 'abc', NULL, 0, 0);
 
-sample navigation function:
+simple navigation function:
 /local/tmo/page/block/navigation.php
 
 2.continue to finish the tree
@@ -7184,11 +7201,64 @@ sample navigation function:
 2.2.update
 
 $navigationId = (int) $this->getRequest()->getParam('id',false);
+,
+$_prevStoreId = Mage::getSingleton('admin/session')->getLastViewedStore(true);
+works with
+$this->getRequest()->getQuery('isAjax')
+,
+->
+update/ajax
+/template/tmo/adminhtml/cms/navigation/tree.phtml
+javascript:function reRenderTree(event, switcher) to rendertree
 
+http://mo-commerce.com.dev/index.php/admin/cms_navigation/tree/key/d848e99ff23c93e1a2ec354e832c35d9/
+http://mo-commerce.com.dev/index.php/admin/catalog_category/tree/key/987e36dd68aacd7590baa9b3417c2f37/
+
+newTreeParams = {
+        animate         : false,
+        loader          : categoryLoader,
+        enableDD        : true,
+        containerScroll : true,
+        selModel        : new Ext.tree.CheckNodeMultiSelectionModel(),
+        rootVisible     : '1',
+        useAjax         : 1,
+        switchTreeUrl   : 'http://mo-commerce.com.dev/index.php/admin/catalog_category/tree/key/987e36dd68aacd7590baa9b3417c2f37/',
+        editUrl         : 'http://mo-commerce.com.dev/index.php/admin/catalog_category/edit/key/bb4a556506288c7ed7f16accf544bb58/',
+        currentNodeId   : 1    };
+
+
+newTreeParams = {
+        animate         : false,
+        loader          : categoryLoader,
+        enableDD        : true,
+        containerScroll : true,
+        selModel        : new Ext.tree.CheckNodeMultiSelectionModel(),
+        rootVisible     : '1',
+        useAjax         : 1,
+        switchTreeUrl   : 'http://mo-commerce.com.dev/index.php/admin/cms_navigation/tree/key/d848e99ff23c93e1a2ec354e832c35d9/',
+        editUrl         : 'http://mo-commerce.com.dev/index.php/admin/cms_navigation/edit/key/b1389664d872da1dccfe369050900b3b/',
+        currentNodeId   : 1    };
+
+
+$rootCategoryId = Mage::app()->getStore($storeId)->getRootCategoryId();
+$navigation = Mage::getModel('cms/navigation');
+$navigation->load($rootCategoryId,'root_navigation_id');
+$rootId = $navigation->getNavigationId();
+
+$this->getChildHtml('form',false); gets the from from below:
+/core/mage/adminhtml/block/widget/form/container.php
+->
+
+[eav_attribute]
+/core/mage/adminhtml/block/catalog/category/tabs.php -> _prepareLayout()
+Mage_Eav_Model_Resource_Entity_Attribute_Group_Collection
+[eav_attribute]
+
+========================================================================================================================================================================
+20130412
 
 
 ========================================================================================================================================================================
-
 
 OpenERP:https://www.openerp.com/en/
 TMO employees:
@@ -7238,9 +7308,5 @@ Title: web developer
 ,
 casher: Yanli Wang <yanli.wang@tmogroup.asia>
 hr: wendy / Yan jiao Lv <wendy.lv@tmogroup.asia>
-,
-Candidate-金如意(PHP)
-13564297620（手机）
-jinruee@gmail.com
 
 ********************************************************************************************************************************************************

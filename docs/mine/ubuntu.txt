@@ -136,7 +136,7 @@ mkdir /usr/local/apache2/man/man1
 mkdir /usr/local/apache2/man/man8
 mkdir /usr/local/apache2/manual
 make[1]:正在离开目录 `/home/maxwell/docs/httpd/httpd-2.2.24'
-root@maxwell-Macmini:/home/maxwell/docs/httpd/httpd-2.2.24# 
+root@maxwell-Macmini:/home/maxwell/docs/httpd/httpd-2.2.24#
 
 
 B.MYSQL
@@ -183,10 +183,10 @@ and when you later start the server.
 The new default config file was created as ./my-new.cnf,
 please compare it with your file and take the changes you need.
 
-root@maxwell-Macmini:/usr/local/mysql# 
+root@maxwell-Macmini:/usr/local/mysql#
 
 scripts/mysql_install_db --user=mysql --explicit_defaults_for_timestamp
-安装完成后执行:  sudo mysqld_safe --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data --user=mysql &amp;  试试 
+安装完成后执行:  sudo mysqld_safe --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data --user=mysql &amp;  试试
 
 C.PHP
 
@@ -217,10 +217,10 @@ Installing PEAR environment:      /usr/local/lib/php/
 /home/maxwell/docs/php53/php-5.3.23/build/shtool install -c ext/phar/phar.phar /usr/local/bin
 ln -s -f /usr/local/bin/phar.phar /usr/local/bin/phar
 Installing PDO headers:          /usr/local/include/php/ext/pdo/
-root@maxwell-Macmini:/home/maxwell/docs/php53/php-5.3.23# 
+root@maxwell-Macmini:/home/maxwell/docs/php53/php-5.3.23#
 
 ==========================================================================================================================
-Error while loading php module [undefined symbol: OnUpdateLong] 
+Error while loading php module [undefined symbol: OnUpdateLong]
 make clean -> to remove old php/configuration
 
 ==========================================================================================================================
@@ -268,9 +268,27 @@ apt-get install -f
 
 sina weibo:
  http://developer.51cto.com/art/201109/293597.htm
- 
- 
+
+
  4.让Ubuntu开机自动启动apache.
  1). 复制 /usr/server/apache2/bin/apachectl到/etc/init.d
  2). 加载为服务
      sudo update-rc.d apachectl defaults
+
+==========================================================================================================================
+
+[asia.tmogroup.ldap]
+Make sure the key is not accessible to other users
+chmod 400 ~/.ssh/asia.tmogroup-firstname.lastname
+,
+Register the key (for better integration / comfortable usage)
+ssh-add ~/.ssh/asia.tmogroup-firstname.lastname
+,
+[asia.tmogroup.ldap]
+
+[asia.tmogroup.xmpp]
+The service is powered by Openfire, a Java-based XMPP server.
+http://en.wikipedia.org/wiki/Openfire
+http://www.igniterealtime.org/projects/spark/
+https://xmpp.tmogroup.asia/
+[asia.tmogroup.xmpp]
