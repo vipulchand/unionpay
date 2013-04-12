@@ -7025,6 +7025,7 @@ CREATE TABLE IF NOT EXISTS `tmo_cms_navigation_pages` (
 
 main navigation table:
 
+Last one:
 CREATE TABLE IF NOT EXISTS `tmo_cms_navigation_entity` (
   `navigation_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Entity ID',
   `root_navigation_id` varchar(255) DEFAULT NULL COMMENT 'Root Navigation Id',
@@ -7049,10 +7050,37 @@ CREATE TABLE IF NOT EXISTS `tmo_cms_navigation_entity` (
   KEY `IDX_TMO_CMS_NAVIGATION_ENTITY_PATH_NAVIGATION_ID` (`path`,`navigation_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='CMS Navigation Table' ;
 
+New one:(20130412)
+
+CREATE TABLE IF NOT EXISTS `tmo_cms_navigation_entity` (
+  `navigation_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Entity ID',
+  `root_navigation_id` varchar(255) DEFAULT NULL COMMENT 'Root Navigation Id',
+
+  `parent_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Parent Category ID',
+  `created_at` timestamp NULL DEFAULT NULL COMMENT 'Creation Time',
+  `updated_at` timestamp NULL DEFAULT NULL COMMENT 'Update Time',
+  `path` varchar(255) NOT NULL COMMENT 'Tree Path',
+  `position` int(11) NOT NULL COMMENT 'Position',
+  `level` int(11) NOT NULL DEFAULT '0' COMMENT 'Tree Level',
+  `children_count` int(11) NOT NULL COMMENT 'Child Count',
+
+  `active` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT 'Active Tag',
+  `name` varchar(255) NOT NULL COMMENT 'Name',
+  `content_type_id` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT 'Content Type ID',
+  `exact_id` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT 'Exact Content ID',
+  `content` text COMMENT 'Content',
+
+  PRIMARY KEY (`navigation_id`),
+  KEY `IDX_TMO_CMS_NAVIGATION_ENTITY_LEVEL` (`level`),
+  KEY `IDX_TMO_CMS_NAVIGATION_ENTITY_PATH_NAVIGATION_ID` (`path`,`navigation_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='CMS Navigation Table' ;
+
 INSERT INTO `tmo_cms_navigation_entity` (`navigation_id`, `root_navigation_id`, `entity_type_id`, `attribute_set_id`, `parent_id`, `created_at`, `updated_at`, `path`, `position`, `level`, `children_count`, `content_type_id`, `exact_id`, `content`, `name`, `alias`, `area`, `section`) VALUES
 (1, NULL, 0, 0, 0, '2013-04-09 16:00:00', '2013-04-10 16:00:00', '1', 0, 0, 1000, 0, 0, NULL, '', NULL, 0, 0),
-(26, '42', 0, 0, 1, '2013-04-10 11:05:57', '2013-04-10 11:05:57', '1/26', 7, 1, 2, 0, 0, NULL, 'everwines', NULL, 0, 0),
-(29, NULL, 0, 0, 26, '0000-00-00 00:00:00', NULL, '1/26/29', 1, 2, 1, 0, 0, NULL, 'abc', NULL, 0, 0);
+(26, '42', 0, 0, 1, '2013-04-10 11:05:57', '2013-04-10 11:05:57', '1/26', 7, 1, 2, 0, 0, '9', 'everwines_navigation', NULL, 0, 0),
+(29, NULL, 0, 0, 26, '0000-00-00 00:00:00', NULL, '1/26/29', 1, 2, 1, 0, 0, NULL, 'everwines_subnavigation_abc', NULL, 0, 0),
+(30, '43', 0, 0, 1, '0000-00-00 00:00:00', NULL, '1/30', 1, 1, 1, 0, 0, 'lplplplplplplplplplpplp', 'default_store_navigation', NULL, 0, 0),
+(31, NULL, 0, 0, 30, '0000-00-00 00:00:00', NULL, '1/30/31', 1, 2, 1, 0, 0, NULL, 'default_store_subnavigation_abc', NULL, 0, 0);
 
 
 3.
@@ -7340,6 +7368,16 @@ if (category_info_tabsJsTabs.activeTab) {
 $('active_tab_id').value = category_info_tabsJsTabs.activeTab.id;
 }
 $('active_tab_id').tabsJsObject = category_info_tabsJsTabs;
+
+1.restructure table tmo_cms_navigation_entity
+2.check ajax about change store - tree
+
+
+http://mo-commerce.com.dev/index.php/admin/catalog_category/edit/
+store/1/id/43/
+
+http://mo-commerce.com.dev/index.php/admin/cms_navigation/edit/
+store/1/id/3/
 
 ========================================================================================================================================================================
 
