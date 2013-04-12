@@ -6990,21 +6990,6 @@ attribute_code = description
         });
     }
 
-[]
-$this->getChildHtml('form',false); gets the from from below:
-/core/mage/adminhtml/block/widget/form/container.php
-->
-protected function _prepareLayout()
-    {
-        if ($this->_blockGroup && $this->_controller && $this->_mode) {
-            //$this->setChild('form', $this->getLayout()->createBlock($this->_blockGroup . '/' . $this->_controller . '_' . $this->_mode . '_form'));
-        }
-        return parent::_prepareLayout();
-    }
-string(9) "adminhtml" string(16) "catalog_category" string(4) "edit"
-$this->setChild('form', $this->getLayout()->createBlock(adminhtml . '/' . catalog_category . '_' . edit . '_form'));
-[]
-
 Mage_Eav_Model_Entity_Attribute_Group
 
 /core/mage/eav/model/entity/abstract.php
@@ -7257,6 +7242,104 @@ Mage_Eav_Model_Resource_Entity_Attribute_Group_Collection
 ========================================================================================================================================================================
 20130412
 
+[BACKEND'S FRONDEND FORMAT]
+div / xxx-edit-container -> edit.phtml
+
+  ul /xxx_info_tabs -> tabs.php
+    li / xxx_info_tabs_??? /
+  /ul
+
+  /iframe iframesave/ -> form.phtml
+
+  /form xxx_eidt_form -> form.phtml
+  /div xxx_tab_content
+    /div xxx_info_tabs_???_content/
+      /div <div class="entry-edit"> or <div id="catalog_category_products">
+  /div
+  /form
+
+/div
+
+Ref:
+/core/mage/adminhtml/block/catalog/form.php
+[BACKEND'S FRONDEND FORMAT]
+
+[TESTING METHOD]
+original data @testing_xxx or @testingxxx
+[TESTING METHOD]
+
+[EDIT BUTTON]
+/code/local/tmo/cms/block/adminhtml/navigation/edit/form.php
+$this->setChild('tabs',$this->getLayout()->createBlock('tmo_cms/adminhtml_navigation_tabs', 'tabs'));
+[EDIT BUTTON]
+
+[SET CHILD BLOCK]: form
+
+if you want to create a new backend form,then:
+
+0.set layout -> 0.1 xml or 0.2
+0.1
+  <adminhtml_sms_log_index> -> controller
+    <reference name="content"> -> reference to / replace to
+      <block type="tmo_sms/adminhtml_log" name="sms_log" /> -> type: block , template: design/template
+    </reference>
+  </adminhtml_sms_log_index>
+or
+0.2
+public function editAction()
+{
+    $this->_initAction();
+    $this->_addLeft($this->getLayout()->createBlock('tmo_sms/adminhtml_log_edit_tabs'));
+    $this->_addContent($this->getLayout()->createBlock('tmo_sms/adminhtml_log_edit'));
+    $this->renderLayout();
+}
+
+1.set belows in block extends is "Mage_Adminhtml_Block_Widget_Form_Container" not "Mage_Adminhtml_Block_Widget_Form"
+$this->_controller = 'adminhtml_log';
+$this->_blockGroup = 'tmo_sms';
+if($this->hasData('template')) then go through template file
+else
+$this->setTemplate('widget/form/container.phtml');
+anyway:
+parent::__construct();
+_prepareLayout()->
+$this->setChild('form', $this->getLayout()->createBlock($this->_blockGroup . '/' . $this->_controller . '_' . $this->_mode . '_form'));
+create new "form"
+
+ALSO !!!
+[Mage_Adminhtml_Block_Widget_Form] has setForm($form) function that could creaet a new form
+$form = new Varien_Data_Form();
+$this->setForm($form);
+public function setForm(Varien_Data_Form $form)
+    {
+        $this->_form = $form;
+        $this->_form->setParent($this);
+        $this->_form->setBaseUrl(Mage::getBaseUrl());
+        return $this;
+    }
+
+2.call it from template
+<?=$this->getFormHtml(); ?>
+or
+<?php echo $this->getChildHtml('form') ?>
+-done.
+[SET CHILD BLOCK]
+
+[Print content of JavaScript object?]
+1.alert(object.toSource());
+2.alert(JSON.stringify(YOUR_OBJECT_HERE, null, 4));
+3.JSON.stringify
+[Print content of JavaScript object?]
+
+
+Refresh URL:
+http://mo-commerce.com.dev/index.php/admin/cms_navigation/refreshPath/store/9/key/5b2df8cdf91127e45f489e24c98b51de/id/26/
+
+category_info_tabsJsTabs.moveTabContentInDest();
+if (category_info_tabsJsTabs.activeTab) {
+$('active_tab_id').value = category_info_tabsJsTabs.activeTab.id;
+}
+$('active_tab_id').tabsJsObject = category_info_tabsJsTabs;
 
 ========================================================================================================================================================================
 
