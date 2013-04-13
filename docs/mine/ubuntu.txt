@@ -292,3 +292,15 @@ http://en.wikipedia.org/wiki/Openfire
 http://www.igniterealtime.org/projects/spark/
 https://xmpp.tmogroup.asia/
 [asia.tmogroup.xmpp]
+
+==========================================================================================================================
+20130413
+单独编译apache的rewrite模块
+/usr/local/apache2/bin/apxs -i -a -c ./mod_rewrite.c
+and
+<Directory /timebox/timebox/websites/com.mo-commerce>
+AllowOverride All
+Options +FollowSymLinks
+Order allow,deny
+Allow from all
+</Directory>
