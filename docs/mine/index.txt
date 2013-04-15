@@ -7472,12 +7472,66 @@ Events working process:
 "Mage::dispatchEvent('catalog_product_get_final_price', array('product' => $product, 'qty' => $qty));"
 ========================================================================================================================================================================
 Today task:
+
 1.Navigation:
+1.1.js checking -> edit.phtml/tree.phtml
+
+[OOP RELATED]
+Tmo_Cms_Block_Adminhtml_Navigation_Edit_Form extends Tmo_Cms_Block_Adminhtml_Navigation_Abstract
+1.instance Tmo_Cms_Block_Adminhtml_Navigation_Edit_Form
+2.Tmo_Cms_Block_Adminhtml_Navigation_Abstract->getRoot();
+3.in getRoot() $this->getNavigationCollection() that mens:
+4.should find the getNavigationCollection() function in class Tmo_Cms_Block_Adminhtml_Navigation_Edit_Form
+[OOP RELATED]
+
+1.2.1.add subnavigation-> can add.
+1.2.2.delete-> can delete
+public function delete()
+    {
+        $this->_getResource()->beginTransaction();
+        try {
+            $this->_beforeDelete();
+            $this->_getResource()->delete($this);
+            $this->_afterDelete();
+
+            $this->_getResource()->commit();
+            $this->_afterDeleteCommit();
+        }
+        catch (Exception $e){
+            $this->_getResource()->rollBack();
+            throw $e;
+        }
+        return $this;
+    }
+1.2.3.save-> can save
+model save -> resource save -> can save.
+$this->_beforeSave($object);
+$this->_processSaveData($this->_collectSaveData($object));
+$this->_afterSave($object);
+
+->
+$transition = Mage::getModel('cms/navigation');
+$transition->load($parentId,'root_navigation_id');
+$parentId = $transition->getNavigationId();
+
+js refresh -> can refresh
+http://mo-commerce.com.dev/index.php/admin/cms_navigation/edit/id/18/store/1/key/807c3acf5fd0cee42a0501f0e8b85079/parent/3/?isAjax=true
+window.editingCategoryBreadcrumbs
+[{text:"Demo (0)", id:"43", store:1, path:"1/43", cls:"folder", allowDrop:true, allowDrag:false, children:[], expanded:true}, {text:"1 (0)", id:"98", store:1, path:"1/43/98", cls:"folder", disabled:true, allowDrop:true, allowDrag:true, expanded:true}]
+
+other issue and bugs:
+1.is active
+2.data checking
+
+tree:
+3.expand tree
+4.after save / expand tree - error
+
+
+
 
 
 2.Product:
-
-
 
 
 ========================================================================================================================================================================
