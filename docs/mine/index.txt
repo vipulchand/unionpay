@@ -7526,7 +7526,8 @@ other issue and bugs:
 tree:
 3.expand tree
 4.after save / expand tree - error
-
+/js/extjs/ext-tree.js
+http://dev.sencha.com/deploy/ext-1.1.1/docs/
 
 
 
