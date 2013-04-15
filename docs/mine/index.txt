@@ -7383,13 +7383,101 @@ store/1/id/3/
 dispatch()
 Mage::app()->getRequest()->setParam
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-rewrite - recheck -> because some important functions were rewrite in local module!!! 
+rewrite - recheck -> because some important functions were rewrite in local module!!!
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
 1.indexaction -> editaction forward with store
 2.edit.phtml -> javascrip
 3.
+
+========================================================================================================================================================================
+20130415
+cron: config.xml
+<config>
+  <crontab>
+        <jobs>
+            <sms_valid_until>
+            <schedule>
+                    <cron_expr>0 1 * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>tmo_sms/observer::scheduledSmsValidUntil</model>
+                </run>
+            </sms_valid_until>
+        </jobs>
+    </crontab>
+</config>
+
+events: config.xml
+web address:
+http://www.magentocommerce.com/wiki/5_-_modules_and_development/0_-_module_development_in_magento/customizing_magento_using_event-observer_method
+    <?xml version="1.0"?>
+    <config>
+      <global>
+        <models>
+            <xyzcatalog>
+                 <class>Xyz_Catalog_Model</class>
+            </xyzcatalog>
+        </models>
+        <events>
+          <catalog_product_get_final_price>
+            <observers>
+              <xyz_catalog_price_observer>
+                <type>singleton</type>
+                <class>Xyz_Catalog_Model_Price_Observer</class>
+                <method>apply_discount_percent</method>
+              </xyz_catalog_price_observer>
+            </observers>
+          </catalog_product_get_final_price>
+        </events>
+      </global>
+    </config>
+
+    or
+
+<events>
+  <EVENT_TO_HOOK>
+    <observers>
+      <module>
+        <type>singleton</type>
+        <class>company_module_model_observer</class>
+        <method>methodToCall</method>
+      </module>
+    </observers>
+  </EVENT_TO_HOOK>
+</events>
+
+like below:
+
+<events>
+            <catalog_product_get_final_price>
+                <observers>
+                    <catalogrule>
+                        <class>catalogrule/observer</class>
+                        <method>processAdminFinalPrice</method>
+                    </catalogrule>
+                </observers>
+            </catalog_product_get_final_price>
+</events>
+
+command:
+->
+change to the magento root folder and type:
+grep -rin -B2 -A2 "Mage::dispatchEvent" app/* > events.txt
+Events working process:
+1.definition events in config.xml events->exist event name/new event name->observers->observer address->type(singleton) and class(exact observer address) and method(action name)
+2.definition observer and method/action
+3.call the event in anywhere,for example: controller/model/ etc... as below sample:
+"Mage::dispatchEvent('catalog_product_get_final_price', array('product' => $product, 'qty' => $qty));"
+========================================================================================================================================================================
+Today task:
+1.Navigation:
+
+
+2.Product:
+
+
 
 
 ========================================================================================================================================================================
