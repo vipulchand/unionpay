@@ -7569,6 +7569,10 @@ create database with original testing data
 php json method:
 json_decode($json, true)
 
+change
+protected function _beforeDelete(Varien_Object $object)
+to
+protected function _beforeDelete(Mage_Core_Model_Abstract $object)
 
 
 
