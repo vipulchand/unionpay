@@ -7520,19 +7520,56 @@ window.editingCategoryBreadcrumbs
 [{text:"Demo (0)", id:"43", store:1, path:"1/43", cls:"folder", allowDrop:true, allowDrag:false, children:[], expanded:true}, {text:"1 (0)", id:"98", store:1, path:"1/43/98", cls:"folder", disabled:true, allowDrop:true, allowDrag:true, expanded:true}]
 
 other issue and bugs:
-1.is active
-2.data checking
+1.is active - it's avtive now.
+->PASS
+active class:x-tree-node-el folder x-tree-node-leaf
+inactive class:
+x-tree-node-el folder x-tree-node-disabled x-tree-node-leaf  x-tree-selected
+vs
+x-tree-node-el x-tree-node-disabled x-tree-node-leaf
+->
+x-tree-node-disabled
+because json data is not correct!
+
+2.data checking - it's okay now
+->PASS
 
 tree:
-3.expand tree
-4.after save / expand tree - error
+3.expand tree - remove
+->
+PASS
+4.after save / expand tree - it's okay now
+->
+PASS
+
+[TREE REFERENCE]
 /js/extjs/ext-tree.js
 http://dev.sencha.com/deploy/ext-1.1.1/docs/
+[TREE REFERENCE]
 
+Finish it:
+name/
+type/(in or outside)
+url/content
+-done.
 
+tree.html -> function _renderNewTree(config, storeParam)
+disable -> drag tree
+-done.
 
+1.shut down navigation module first -> /tmo/page/block/navigation.php
+-done.
+
+create database with original testing data
+-done.
 
 2.Product:
+========================================================================================================================================================================
+20130416
+php json method:
+json_decode($json, true)
+
+
 
 
 ========================================================================================================================================================================
