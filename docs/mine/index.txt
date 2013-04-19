@@ -8058,6 +8058,11 @@ eg.:
 2.folder/ everwines/page/html/xxx
 3.call static block in above template
 
+This block is for product list(list feature)
+<block type="ultimo/product_list_featured" name="homepage_featured_list" template="catalog/product/list_featured_slider.phtml" />
+template:
+catalog/product/list_featured_slider.phtml
+
 
 ========================================================================================================================================================================
 
