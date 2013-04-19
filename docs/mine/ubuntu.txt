@@ -1,0 +1,325 @@
+windows/ubuntu 文件共享之 Samba 配置
+webaddress:
+http://www.cnblogs.com/foxhengxing/archive/2010/08/14/1799774.html
+
+安装samba
+sudo apt-get install samba
+sudo apt-get install smbfs
+
+代码:
+workgroup = WORKGROUP
+display charset = UTF-8
+unix charset = UTF-8
+dos charset = cp936
+现在要添加testshare这个网络访问帐户。如果系统中当前没有这个帐户，那么
+代码:
+sudo useradd testshare
+要注意，上面只是增加了testshare 这个用户，却没有给用户赋予本机登录密码。所以这个用户将只能从远程访问，不能从本机登录。而且samba的登录密码可以和本机登录密码不一样。
+现在要新增网络使用者的帐号：
+代码:
+sudo smbpasswd -a testshare  ，然后输入密码123456
+sudo gedit /etc/samba/smbusers
+在新建立的文件内加入下面这一行并保存
+代码:
+testshare= "network username"
+重启一下 smbd
+sudo service smbd restart
+看一下smbd监听的端口，如果有显示相应的端口就代表启动了
+netstat -tlnp |grep smb
+假设windows的共享目录为test,将其挂载到/mnt/winshare
+mkdir  /mnt/winshare
+mount   -t   smbfs   -o   username=XXX,password=’pwd’   //169.254.191.56/test   /mnt/winshare
+
+============================================================================================================================================================
+
+eclipse EE get JPA lib throw error  MOZILLA_FIVE_HOME not set
+https://launchpad.net/ubuntu/oneiric/amd64/xulrunner-1.9.2/1.9.2.17+build3+nobinonly-0ubuntu1
+Download and install Xulrunner deb package from the Launchpad page above
+Add -Dorg.eclipse.swt.browser.XULRunnerPath=/usr/lib/xulrunner-1.9.2.17 option to your eclipse.ini (AptanaStudio3.ini)
+
+============================================================================================================================================================
+
+ubuntu默认root密码问题
+webaddress:
+http://shewolfep.iteye.com/blog/413396
+
+
+
+
+ubuntu默认root密码问题
+
+    博客分类：
+    linux、ubuntu
+
+UbuntuDebianUnixBlog
+转http://xiaofei006.iteye.com/blog/299339
+新接触ubuntu（base on debian）的人，大多会因为安装中没有提示root密码而不太清楚为什么会这样。
+如何设定/改变/启用 root 使用者的密码?
+sudo passwd root
+为了启用 root 帐号 (也就是 设置一个口令) 使用:
+sudo passwd root
+当你使用完毕后屏蔽 root 帐号 使用:
+sudo passwd -l root
+这个将锁住 root 帐号.
+如何在终端机模式下切换到 root 身份?
+sudo -s -H
+========================================================================
+ubuntu默认root密码
+安装完Ubuntu后忽然意识到没有设置root密码，不知道密码自然就无法进入根用户下。到网上搜了一下，原来是这麽回事。Ubuntu的
+
+默认root密码是随机的，即每次开机都有一个新的root密码。我们可以在终端输入命令 sudo passwd，然后输入当前用户的密码，
+
+enter，终端会提示我们输入新的密码并确认，此时的密码就是root新密码。修改成功后，输入命令 su root，再输入新的密码就ok
+
+了。
+ubuntu默认root密码是什么？
+没有默认的，因为你还没给root设置密码，，你第一个 user 是在 admin 组 ，所以他可以给 root 设置密码 , so
+
+sudo passwd root
+[sudo] password for you ：---> 输入你的密码，不回显
+Enter new UNIX password: --- > 设置root 密码
+Retype new UNIX password: --> 重复
+=========================================================================
+用安装时建立的用户登陆后在Shell执行
+sudo passwd root
+回车
+Password:
+后输入刚建立的用户密码回车
+Enter new UNIX password:
+这时输入要设置的root密码两次就会看到
+password updated successfully了！
+=========================================================================
+安装后可以到用户和组里面去改，随便改的。
+要在登录时用root的话，可以在“登录界面”里改，让管理员登录系统的选项就可以了
+
+==========================================================================================================================
+
+apt-get install php5-dev
+cd /tmp
+apt-get source php5
+cd  /tmp/php5-5.3.6/ext/mysqlnd
+mv config9.m4 config.m4
+sed -ie "s{ext/mysqlnd/php_mysqlnd_config.h{config.h{" mysqlnd_portability.h
+phpize
+./configure
+cd /tmp/php5-5.3.6/ext/mysql
+phpize
+./configure --with-mysql=mysqlnd
+make && make install
+cd /tmp/php5-5.3.6/ext/mysqli
+phpize
+./configure --with-mysqli=mysqlnd
+make && make install
+
+==========================================================================================================================
+A.APACHE2
+
+Installing configuration files
+mkdir /usr/local/apache2/conf
+mkdir /usr/local/apache2/conf/extra
+mkdir /usr/local/apache2/conf/original
+mkdir /usr/local/apache2/conf/original/extra
+Installing HTML documents
+mkdir /usr/local/apache2/htdocs
+Installing error documents
+mkdir /usr/local/apache2/error
+Installing icons
+mkdir /usr/local/apache2/icons
+mkdir /usr/local/apache2/logs
+Installing CGIs
+mkdir /usr/local/apache2/cgi-bin
+Installing header files
+Installing build system files
+Installing man pages and online manual
+mkdir /usr/local/apache2/man
+mkdir /usr/local/apache2/man/man1
+mkdir /usr/local/apache2/man/man8
+mkdir /usr/local/apache2/manual
+make[1]:正在离开目录 `/home/maxwell/docs/httpd/httpd-2.2.24'
+root@maxwell-Macmini:/home/maxwell/docs/httpd/httpd-2.2.24#
+
+
+B.MYSQL
+
+To start mysqld at boot time you have to copy
+support-files/mysql.server to the right place for your system
+
+PLEASE REMEMBER TO SET A PASSWORD FOR THE MySQL root USER !
+To do so, start the server, then issue the following commands:
+
+  ./bin/mysqladmin -u root password 'new-password'
+  ./bin/mysqladmin -u root -h maxwell-Macmini password 'new-password'
+
+Alternatively you can run:
+
+  ./bin/mysql_secure_installation
+
+which will also give you the option of removing the test
+databases and anonymous user created by default.  This is
+strongly recommended for production servers.
+
+See the manual for more instructions.
+
+You can start the MySQL daemon with:
+
+  cd . ; ./bin/mysqld_safe &
+
+You can test the MySQL daemon with mysql-test-run.pl
+
+  cd mysql-test ; perl mysql-test-run.pl
+
+Please report any problems with the ./bin/mysqlbug script!
+
+The latest information about MySQL is available on the web at
+
+  http://www.mysql.com
+
+Support MySQL by buying support/licenses at http://shop.mysql.com
+
+WARNING: Found existing config file ./my.cnf on the system.
+Because this file might be in use, it was not replaced,
+but was used in bootstrap (unless you used --defaults-file)
+and when you later start the server.
+The new default config file was created as ./my-new.cnf,
+please compare it with your file and take the changes you need.
+
+root@maxwell-Macmini:/usr/local/mysql#
+
+scripts/mysql_install_db --user=mysql --explicit_defaults_for_timestamp
+安装完成后执行:  sudo mysqld_safe --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data --user=mysql &amp;  试试
+
+C.PHP
+
+Installing PHP SAPI module:       apache2handler
+/usr/local/apache2/build/instdso.sh SH_LIBTOOL='/usr/local/apache2/build/libtool' libphp5.la /usr/local/apache2/modules
+/usr/local/apache2/build/libtool --mode=install cp libphp5.la /usr/local/apache2/modules/
+cp .libs/libphp5.so /usr/local/apache2/modules/libphp5.so
+cp .libs/libphp5.lai /usr/local/apache2/modules/libphp5.la
+libtool: install: warning: remember to run `libtool --finish /home/maxwell/docs/php53/php-5.3.23/libs'
+chmod 755 /usr/local/apache2/modules/libphp5.so
+[activating module `php5' in /usr/local/apache2/conf/httpd.conf]
+Installing PHP CLI binary:        /usr/local/bin/
+Installing PHP CLI man page:      /usr/local/man/man1/
+Installing build environment:     /usr/local/lib/php/build/
+Installing header files:          /usr/local/include/php/
+Installing helper programs:       /usr/local/bin/
+  program: phpize
+  program: php-config
+Installing man pages:             /usr/local/man/man1/
+  page: phpize.1
+  page: php-config.1
+Installing PEAR environment:      /usr/local/lib/php/
+[PEAR] Archive_Tar: upgrade to a newer version (1.3.7 is not newer than 1.3.7)
+[PEAR] Console_Getopt: upgrade to a newer version (1.3.0 is not newer than 1.3.0)
+[PEAR] Structures_Graph: upgrade to a newer version (1.0.4 is not newer than 1.0.4)
+[PEAR] XML_Util: upgrade to a newer version (1.2.1 is not newer than 1.2.1)
+[PEAR] PEAR: upgrade to a newer version (1.9.4 is not newer than 1.9.4)
+/home/maxwell/docs/php53/php-5.3.23/build/shtool install -c ext/phar/phar.phar /usr/local/bin
+ln -s -f /usr/local/bin/phar.phar /usr/local/bin/phar
+Installing PDO headers:          /usr/local/include/php/ext/pdo/
+root@maxwell-Macmini:/home/maxwell/docs/php53/php-5.3.23#
+
+==========================================================================================================================
+Error while loading php module [undefined symbol: OnUpdateLong]
+make clean -> to remove old php/configuration
+
+==========================================================================================================================
+install curl
+安装:
+
+apt-get install curl
+
+apt-get install libcurl4-gnutls-dev
+如果出现:
+configure: error: libjpeg.(a|so) not found.
+安装:  apt-get install libjpeg-dev
+如果出现:
+configure: error: libpng.(a|so) not found.
+安装:  apt-get install libpng-dev
+如果出现:configure: error: freetype.h not found.
+安装:  apt-get install libfreetype6-dev
+如果出现:configure: error: sasl.h not found!
+安装:  apt-get install libsasl2-dev
+
+==========================================================================================================================
+install libmemcached
+
+apt-get install libevent-dev
+apt-get install libmemcached-dev
+
+ 执行时会报错：libmemcached.so.10: cannot open shared object file: No such file or director
+ 原因是 libmemcached.so.10 被安装到了 /usr/local/lib下，而共享库默认位置是 /usr/lib 网上说可以把目录 /usr/local/lib 设置到环境变量，但我设置完后不起作用。
+ 于是用建立一个链接： ln /usr/local/lib/libmemcached.so.10  /usr/lib/libmemcached.so.10
+
+==========================================================================================================================
+
+install xdebug
+sudo apt-get install php-pear
+sudo apt-get install php5-dev
+sudo pecl install xdebug
+
+==========================================================================================================================
+for update:
+apt-get install -f
+
+4、让apache、php支持mysql
+ sudo apt-get install libapache2-mod-auth-mysql
+ sudo apt-get install php5-mysql
+
+sina weibo:
+ http://developer.51cto.com/art/201109/293597.htm
+
+
+ 4.让Ubuntu开机自动启动apache.
+ 1). 复制 /usr/server/apache2/bin/apachectl到/etc/init.d
+ 2). 加载为服务
+     sudo update-rc.d apachectl defaults
+
+==========================================================================================================================
+
+[asia.tmogroup.ldap]
+Make sure the key is not accessible to other users
+chmod 400 ~/.ssh/asia.tmogroup-firstname.lastname
+,
+Register the key (for better integration / comfortable usage)
+ssh-add ~/.ssh/asia.tmogroup-firstname.lastname
+,
+[asia.tmogroup.ldap]
+
+[asia.tmogroup.xmpp]
+The service is powered by Openfire, a Java-based XMPP server.
+http://en.wikipedia.org/wiki/Openfire
+http://www.igniterealtime.org/projects/spark/
+https://xmpp.tmogroup.asia/
+[asia.tmogroup.xmpp]
+
+==========================================================================================================================
+rewrite of apache
+单独编译apache的rewrite模块
+/usr/local/apache2/bin/apxs -i -a -c ./mod_rewrite.c
+and
+<Directory /timebox/timebox/websites/com.mo-commerce>
+AllowOverride All
+Options +FollowSymLinks
+Order allow,deny
+Allow from all
+</Directory>
+==========================================================================================================================
+remove reinstall mysql:
+apt-get purge mysql-server
+apt-get purge mysql-common
+Afterwards I deleted /var/lib/mysql /etc/mysql and /var/log/mysql
+
+aptitude purge mysql-server
+aptitude install mysql-server
+
+dpkg --configure -a
+
+sudo dpkg-reconfigure mysql-server-5.1
+
+
+==========================================================================================================================
+install android
+$ sudo apt-get install ia32-libs
+
+==========================================================================================================================
