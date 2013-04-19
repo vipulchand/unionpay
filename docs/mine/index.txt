@@ -7577,6 +7577,392 @@ protected function _beforeDelete(Mage_Core_Model_Abstract $object)
 
 
 ========================================================================================================================================================================
+20130417
+
+1.move abled
+->PASS
+
+[GETTREEJSON]
+public function getTreeJson($parenNodeNavigation=null)
+file: tmo/cms/block/adminhtml/navigation/tree.php
+original file: /code/core/mage/adminhtml/block/catalog/category/tree.php
+[GETTREEJSON]
+
+[EVENT]
+web address:http://yanggaojiao.iteye.com/blog/692019
+
+分发(dispatch)一个事件(event)
+Mage::dispatchEvent('custom_event', array('object'=>$this));
+
+捕捉(catch)一个事件(event)
+在该目录的config.xml文件中，我们新定义一个event observer，下面是参考示例（当然你可以定义不同scope的event observer）：
+<events>
+      <custom_event> <!-- identifier of the event we want to catch -->
+        <observers>
+          <custom_event_handler> <!-- identifier of the event handler -->
+            <type>model</type> <!-- class method call type; valid are model, object and singleton -->
+            <class>baobazacustommodule/observer</class> <!-- observers class alias -->
+            <method>customObserverAction</method>  <!-- observer's method to be called -->
+            <args></args> <!-- additional arguments passed to observer -->
+          </custom_event_handler>
+        </observers>
+      </custom_event>
+</events>
+[EVENT]
+
+2.reorder, reinvoice
+->
+one order only could to create one new link order, so this function need to custom
+
+
+3.product of everwines!
+
+attribute: "coupon_barcode_image"
+table: core_config_data
+design/watermark/coupon_barcode_image_position
+
+table: eav_attribute
+attribute_id: 208
+entity_type_id: 4
+attribute_code: coupon_barcode_image
+frontend_model: catalog/product_attribute_frontend_image
+frontend_input: media_image
+frontend_label: Coupon Barcode
+->
+catalog->attributes->manage attributes
+catalog->attributes->manage attribute sets
+->
+create a new attribute set
+->
+set up attributes for everwines's product:
+
+1."Material Number物料编码"
+2."Material Group物料组"
+3."EAN Number 1条形码1"
+4."Product name - simplified for website ENGLISH网站简短产品名称 英文"
+5."Product name - simplified for website CHINESE网站简短产品名称 中文"
+6."Sales Description ENGLISH (Sort↑)对外销售英文产品名称"
+7."Sales Description CHINESE对外销售中文产品名称"
+8."Internal Product Type内部产品类型"
+9."Vintage年份"
+10."Size容量"
+11."Sales Unit销售单位"
+12."Alcohol酒精度"
+13."Wine-making ENGLISH酿制方法 英文"
+14."Wine-making CHINESE酿制方法 中文"
+15."Wine-making region 1 ENGLISH产区名称1 英文"
+16."Wine-making region 1 CHINESE产区名称1 中文"
+17."Wine-making region 2 ENGLISH产区名称2 英文"
+18."Wine-making region 2 CHINESE产区名称2 中文"
+19."Grape Keyword 1 ENGLISH葡萄品种关键词1 英文"
+20."Grape Keyword 2 ENGLISH葡萄品种关键词2 英文"
+21."Grape Keyword 3 ENGLISH葡萄品种关键词3 英文"
+22."Grape Keyword 4 ENGLISH葡萄品种关键词4 英文"
+23."Grape Keyword 5 ENGLISH葡萄品种关键词5 英文"
+24."Grape Keyword 6 ENGLISH葡萄品种关键词6 英文"
+25."Grape Keyword 1 CHINESE葡萄品种关键词1 中文"
+26."Grape Keyword 2 CHINESE葡萄品种关键词2 中文"
+27."Grape Keyword 3 CHINESE葡萄品种关键词3 中文"
+28."Grape Keyword 4 CHINESE葡萄品种关键词4 中文"
+29."Grape Keyword 5 CHINESE葡萄品种关键词5 中文"
+30."Grape Keyword 6 CHINESE葡萄品种关键词6 中文"
+31."Grape Varieties Description ENGLISH葡萄成分描述 英文"
+32."Grape Varieties Description CHINESE葡萄成分描述 中文"
+33."Wine/Product Type ENGLISH产品类型 英文"
+34."Wine/Product Type CHINESE产品类型 中文"
+35."Internal Region of OriginSAP内部产地"
+36."Country of Origin ENGLISH原产国名称 英文"
+37."Country of Origin CHINESE原产国名称 中文"
+38."Winery/Brand ENGLISH酒庄/品牌名称 英文"
+39."Winery/Brand CHINESE酒庄/品牌名称 中文"
+40."Winery introduction ENGLISH酒庄介绍 英文"
+41."Winery introduction CHINESE酒庄介绍 中文"
+42."Product introduction ENGLISH产品介绍 英文"
+43."Product introduction CHINESE产品介绍 中文"
+44."Tasting notes ENGLISH口感介绍 英文"
+45."Tasting notes CHINESE口感介绍 中文"
+46."Food matching ENGLISH食物搭配 英文"
+47."Food matching CHINESE食物搭配 中文"
+48."Reviews & Awards ENGLISH评论与奖项 英文"
+49."Reviews & Awards CHINESE评论与奖项 中文"
+50."Storage conditions ENGLISH储存条件 英文"
+51."Storage conditions CHINESE储存条件 中文"
+52."Service tips ENGLISH侍酒提示 英文"
+53."Service tips CHINESE侍酒提示 中文"
+54."Ingredient of Food ENGLISH食品配料 英文"
+55."Ingredient of Food CHINESE食品配料 中文"
+56."Shelf Life (Months)保质期 (月)"
+57."Internal SupplierSAP内部供应商"
+58."Price 1产品价格1"
+59."Price 2产品价格1"
+60."Promotion Info ENGLISH促销信息 英文"
+61."Promotion Info CHINESE促销信息 中文"
+62."Website of Product产品官网"
+63."Display Status 1显示状态1"
+64."Display Status 2显示状态2"
+65."Photo of Product 1产品图片1"
+66."Photo of Product 2产品图片2"
+67."Photo of Bottle Label 1瓶标图片1"
+68."Photo of Bottle Label 2瓶标图片2"
+69."Logo of Brand品牌徽标"
+
+Exist general product(attributes):
+1.name
+2.description
+3.short_description
+4.sku
+5.weight
+6.news_from_date
+7.news_to_date
+8.status
+9.url_key
+10.visibility
+11.country_of_manufacture
+12.is_imported
+13.highlights
+14.datetime_from
+15.datetime_to
+
+16.color
+17.cost
+
+
+Everwines functional requirements:
+online shopping:main:
+Left pane (wine navigator) / right pane results wine search – Top bar short links to wines
+->
+online shopping: product summary:
+Summary Info:
+Region
+Grape
+Type
+Year
+->
+online shopping:Product detail
+Info:
+Winery
+Description
+Appearance
+Aroma
+Taste
+Food & Wine Matching
+Technical data
+Summary Info:
+Country
+Region
+Grape
+Type
+Year
+
+Reviews and scores
+STOCK info per region
+
+
+
+local.xml
+1.defined in layout
+
+<reference name="left">
+<block type="cms/block" name="block_left_bottom" after="-">
+<action method="setBlockId"><block_id>block_left_bottom</block_id></action>
+</block>
+</reference>
+
+2.use action unsetchild can remove the defined block
+<action method="unsetChild"><name>block_left_bottom</name></action>
+
+layout update xml:
+<reference name="content">
+<block type="catalog/product_compare_sidebar" before="cart_sidebar" name="catalog.compare.sidebar" template="catalog/product/compare/sidebar.phtml"/>
+        <block type="catalog/product_new" name="catalog.product.new" alias="product_new" template="catalog/product/new.phtml" after="cms_page">
+            <action method="addPriceBlockType">
+                <type>bundle</type>
+                <block>bundle/catalog_product_price</block>
+                <template>bundle/catalog/product/price.phtml</template>
+            </action>
+        </block>
+        <block type="reports/product_viewed" name="home.reports.product.viewed" alias="product_viewed" template="reports/home_product_viewed.phtml" after="product_new">
+            <action method="addPriceBlockType">
+                <type>bundle</type>
+                <block>bundle/catalog_product_price</block>
+                <template>bundle/catalog/product/price.phtml</template>
+            </action>
+        </block>
+        <block type="reports/product_compared" name="home.reports.product.compared" template="reports/home_product_compared.phtml" after="product_viewed">
+            <action method="addPriceBlockType">
+                <type>bundle</type>
+                <block>bundle/catalog_product_price</block>
+                <template>bundle/catalog/product/price.phtml</template>
+            </action>
+        </block>
+    </reference>
+    <reference name="right">
+        <action method="unsetChild"><alias>catalog.compare.sidebar</alias></action>
+</reference>
+
+<reference name="left">
+        <action method="unsetChild"><alias>block_left_bottom</alias></action>
+</reference>
+
+issue:
+1.in category setting: what's "Is Anchor"
+2.5 starts review
+3.inport product
+4.
+
+
+========================================================================================================================================================================
+20130418
+catalog_product_view
+
+<reference name="right">
+			<action method="unsetChild"><name>catalog.product.related</name></action>
+		</reference>
+		<reference name="product.info">
+			<block type="catalog/product_list_related" name="catalog.product.related" template="catalog/product/list/related_tabbed.phtml"/>
+		</reference>
+
+1.layout configuration
+1.1.below layout,we did not use!
+/app/design/frontend/ultimo/tmo/layout/infortis_custom.xml
+
+1.2.below xml configuration could remove product info_tabs
+<reference name="product.info">
+<action method="unsetChild"><alias>info_tabs</alias></action>
+</reference>
+
+1.3.reference:
+http://www.magentocommerce.com/wiki/modules_reference/English/Mage_Adminhtml/catalog_category/edit#display_settings_tab
+http://www.magentocommerce.com/knowledge-base/entry/tutorial-creating-and-managing-categories
+
+http://www.magentocommerce.com/knowledge-base/entry/tutorial-creating-and-managing-categories
+
+->
+
+[is Anchor]
+<catalog_category_layered> + local.xml's <default>
+[is Anchor]
+
+The Custom Layout Update is essentially a static block, with a few differences. Rather than HTML, the structure must be in XML format. The Update will display at the bottom of the page, below the products, whereas a static block will display above the products (if the static block is set to display with products). The Update will display on the page only during the dates specified in the Active date range.
+->
+Overwrite this file:
+/core/mage/catalog/model/design.php
+public function getDesignSettings($object)
+->
+return $this->_extractSettings($category);
+
+
+[MAGENTO BLOCK]
+[BLOCK-DEFINITION & BLOCK CALL]
+1.definition : Mage_Adminhtml_Block_Template
+$this->setChild('delete_button',
+                $this->getLayout()->createBlock('adminhtml/widget_button')
+                    ->setData(array(
+                        'label'     => Mage::helper('tmo_cms')->__('Delete Navigation'),
+                        'onclick'   => "navigationDelete('" . $this->getUrl('*/*/delete', array('_current' => true)) . "', true, {$navigationId})",
+                        'class' => 'delete'
+                    ))
+            );
+2.call
+in layout use below code = getChildHtml("delete_button");
+
+3.definition in backend of magento(static blocks)
+4.call
+<block type="cms/block" name="block_left_bottom" after="-">
+<action method="setBlockId"><block_id>block_left_bottom</block_id></action>
+</block>
+
+Custom Layout Update - Custom Design - Category - Catalog
+<reference name="left">
+<action method="unsetChild"><alias/name>block_left_bottom</alias/name></action> //remove static block
+</reference>
+<reference name="content">
+<block type="cms/block" name="nsb">
+<action method="setBlockId"><block_id>nsb</block_id></action> //call static block
+</block>
+</reference>
+
+above xml also work for page,put those code into "Custom Layout Update XML - Custom Design - Design - Page"
+
+<reference name="root">
+<action method="unsetChild"><unset>breadcrumbs</unset></action>
+</reference>
+
+{???}
+1.definition and call at same time - normal way -> layout.xml
+2.definition in coding // calling in coding -> setChild/getChildHtml
+3.definition in backend // calling in layout -> setBlockId or coding ($this->getLayout()->createBlock('cms/block')->setBlockId('xxx')->toHtml();)
+{???}
+
+[BLOCK-DEFINITION & BLOCK CALL]
+[MAGENTO BLOCK]
+
+,
+
+[MAGENTO CATEGORY]
+ALL CATEGORY ASIGN TO DIFFERENT [STORE]
+[MAGENTO CATEGORY]
+
+Backend -> Theme Settings -> Show Home Link -> Only add nenu into navigation bar
+
+set below 2 class to display:block to display breadcrumbs:
+/skin/frontend/ultimo/default/css/style.css
+body.cms-index-index .breadcrumbs { display:block; }
+/skin/frontend/ultimo/tmo/css/custom.css
+.breadcrumbs
+{
+  display:block;
+}
+
+========================================================================================================================================================================
+20130419
+
+1.find where is rss field and change it to FAQ
+template: rss in below file:
+/app/design/frontend/base/default/template/catalog/category/view.phtml
+<!-- Change RSS Feed to FAQ -->
+<a href="FAQ.html" style="float:right;"><?php echo $this->__('FAQ') ?></a>
+<?php if($this->IsRssCatalogEnable() && $this->IsTopCategory()): ?>
+<a href="<?php echo $this->getRssLink() ?>" class="link-rss"><?php echo $this->__('Subscribe to RSS Feed') ?></a>
+<?php endif; ?>
+-done.
+
+2.find where is shop by and change it to Shop by
+template: Shop by -> Choose by
+/app/design/frontend/base/default/template/catalog/layer/view.phtml
+-done.
+
+3.add 5 starts to review function
+->
+add 1-5 starts:
+
+for the review function:
+http://www.magentocommerce.com/wiki/welcome_to_the_magento_user_s_guide/chapter_9
+http://www.magentocommerce.com/wiki/welcome_to_the_magento_user_s_guide/chapter_9
+
+original magento has this
+mo-commerce has not this... -> why? because mo-commerce disabled it!
+configuration file:
+/app/code/local/tmo/catalog/etc/adminhtml.xml
+<reviews_ratings module="review">
+<disabled>0</disabled>
+</reviews_ratings>
+
+template:
+/app/design/frontend/ultimo/default/template/catalog/product/list.phtml
+<?php if($_product->getRatingSummary()): ?>
+                	<?php if ($gc['display_rating'] == 1): //Display on hover ?>
+                    	<div class="display-onhover"><?php echo $this->getReviewsSummaryHtml($_product, 'short') ?></div>
+                    <?php elseif ($gc['display_rating'] == 2): //Always display ?>
+                    <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+                    <?php endif; ?>
+                <?php endif; ?>
+-done.
+
+How to create Categories Grid (list) with images:
+http://www.magentocommerce.com/wiki/4_-_themes_and_template_customization/catalog/how_to_create_categories_grid_list_with_images
+
+========================================================================================================================================================================
 
 OpenERP:https://www.openerp.com/en/
 TMO employees:
