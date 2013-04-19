@@ -294,7 +294,7 @@ https://xmpp.tmogroup.asia/
 [asia.tmogroup.xmpp]
 
 ==========================================================================================================================
-20130413
+rewrite of apache
 单独编译apache的rewrite模块
 /usr/local/apache2/bin/apxs -i -a -c ./mod_rewrite.c
 and
@@ -304,3 +304,16 @@ Options +FollowSymLinks
 Order allow,deny
 Allow from all
 </Directory>
+==========================================================================================================================
+remove reinstall mysql:
+apt-get purge mysql-server
+apt-get purge mysql-common
+Afterwards I deleted /var/lib/mysql /etc/mysql and /var/log/mysql
+
+aptitude purge mysql-server
+aptitude install mysql-server
+
+dpkg --configure -a
+
+sudo dpkg-reconfigure mysql-server-5.1
+
