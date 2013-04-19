@@ -7959,8 +7959,105 @@ template:
                 <?php endif; ?>
 -done.
 
+[active filterabled attributes in frondend]
+1.create new attribute
+2.set type of product /price or color and so on.
+3.set "Use in Layered Navigation" to "Filterable(no results)
+4.add the attribute to product(attribute sets)
+[active filterabled attributes in frondend]
+
+
+[active rating for the review]
+process:
+1.catalog -> review and rating -> manage ratings (to setup rating for different website)
+2.check it from frondend
+[active rating for the review]
+
+
 How to create Categories Grid (list) with images:
 http://www.magentocommerce.com/wiki/4_-_themes_and_template_customization/catalog/how_to_create_categories_grid_list_with_images
+http://allwrightythen.com/blog/how-to-display-sub-category-grid-in-magento/
+
+? improve "CHOOSE BY" function? - it's okay - done.
+
+>
+
+bug issue:
+1. image of products
+
+Next is custom layout of catalog/product/view/:
+catalog/product/view/
+
+[Categories - Custom Layout Update]
+use below coding to custom layout:
+in catalog-category Custom layout update:
+<reference name="right">
+<action method="unsetChild"><alias>block_right_bottom</alias></action>
+[paypal log]
+<action method="unsetChild"><name>paypal.partner.right.logo</name></action>
+[paypal log]
+</reference>
+[Categories - Custom Layout Update]
+
+[CATALOG_PRODUCT_VIEW]
+use below xml coding to configurate catalog_product_view
+<reference name="product.info">
+->
+<reference name="product.info">
+  <action method="setTemplate"> <template>catalog/product/NEW_VIEW.phtml</template></action>
+</reference>
+[CATALOG_PRODUCT_VIEW]
+
+Below is what's my next step:
+1.
+create a new folder of template,it just only for everwines
+2.
+use simple xml file to custom the layout!
+->
+
+/app/design/frontend/base/default/layout/page.xml
+<block type="page/switch" name="store_language" as="store_language" template="page/switch/languages.phtml"/>
+->
+use xml to add a block that after "store_language"
+->
+<!-- add special blocks for everwines in layout begin -->
+<block type="page/html_header" name="hotline_about_our_contact" as="hotline_about_our_contact" template="page/html/everwines/header_addition.phtml"/>
+<!-- add special blocks for everwines in layout end -->
+
+reference to
+<block type="page/html_header" name="header" as="header">
+
+1.use static phtml file
+<reference name="header">
+<block type="page/html_header" name="hotline_about_our_contact" as="hotline_about_our_contact" template="everwines/page/html/header_addition.phtml"/>
+</reference>
+
+2.use static block(only work in content,left,right and so on)
+<reference name="header">
+<block type="cms/block" name="nsb">
+<action method="setBlockId"><block_id>nsb</block_id></action>
+</block>
+</refernce>
+
+in cms page:
+1.you have to set exact template file if you want to reference to header
+2.you can reference content any time
+3.you have to set exact template file if you want to reference to footer
+
+
+<reference name="header">
+<block type="page/html_header" name="hotline_about_our_contact" as="hotline_about_our_contact" template="everwines/page/html/header_addition.phtml"/>
+</reference>
+
+this is right way:
+1.just default layout.
+2.special template.
+3.call static block in template
+eg.:
+1.pass
+2.folder/ everwines/page/html/xxx
+3.call static block in above template
+
 
 ========================================================================================================================================================================
 
