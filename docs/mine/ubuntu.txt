@@ -319,7 +319,18 @@ sudo dpkg-reconfigure mysql-server-5.1
 
 
 ==========================================================================================================================
-install android
+install android (only for 64bit)
 $ sudo apt-get install ia32-libs
+
+==========================================================================================================================
+ubuntu server版本上安装xwindow 
+# apt-get install xserver-xorg 
+ # apt-get install x-window-system-core 
+ # dpkg-reconfigure xserver-xorg 
+ # apt-get install gnome-core 
+ # apt-get install gdm xscreensaver 
+ # apt-get install ttf-arphic* 
+ # startx
+ 
 
 ==========================================================================================================================
