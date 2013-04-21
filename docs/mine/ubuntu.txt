@@ -338,3 +338,42 @@ We have to install png lib for png image:
 apt-get install libpng-dev
 
 ==========================================================================================================================
+Linux scp命令用于Linux之间复制文件和目录，具体如何使用这里好好介绍一下，从本地复制到远程、从远程复制到本地是两种使用方式。这里有具体举例：
+scp [可选参数] file_source file_target
+* 命令格式：
+scp local_file remote_username@remote_ip:remote_folder
+或者
+scp local_file remote_username@remote_ip:remote_file
+或者
+scp local_file remote_ip:remote_folder
+或者
+scp local_file remote_ip:remote_file
+* 复制目录：
+* 命令格式：
+scp -r local_folder remote_username@remote_ip:remote_folder
+或者
+scp -r local_folder remote_ip:remote_folder
+第1个指定了用户名，命令执行后需要再输入密码；
+第2个没有指定用户名，命令执行后需要输入用户名和密码；
+* 例子：
+scp -r /home/space/music/ root@www.cumt.edu.cn:/home/root/others/
+scp -r /home/space/music/ www.cumt.edu.cn:/home/root/others/
+
+
+从 远程 复制到 本地，只要将 从 本地 复制到 远程 的命令 的 后2个参数 调换顺序 即可；
+
+例如：
+scp root@www.cumt.edu.cn:/home/root/others/music /home/space/music/1.mp3
+scp -r www.cumt.edu.cn:/home/root/others/ /home/space/music/
+scp 本地用户名 @IP 地址 : 文件名 1 远程用户名 @IP 地址 : 文件名 2
+[ 本地用户名 @IP 地址 :] 可以不输入 , 可能需要输入远程用户名所对应的密码 .
+可能有用的几个参数 :
+-v 和大多数 linux 命令中的 -v 意思一样 , 用来显示进度 . 可以用来查看连接 , 认证 , 或是配置错误 .
+-C 使能压缩选项 .
+-P 选择端口 . 注意 -p 已经被 rcp 使用 .
+-4 强行使用 IPV4 地址 .
+-6 强行使用 IPV6 地址 .
+Linux scp命令的使用方法应该可以满足大家对Linux文件和目录的复制使用了。
+
+
+==========================================================================================================================
