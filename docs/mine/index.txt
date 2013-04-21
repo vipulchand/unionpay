@@ -8090,7 +8090,17 @@ basic layout:<block type="page/html" name="root" output="toHtml" template="page/
 </reference>
 [Basic Settings of Layout]
 
+1.xml-unsetchild(the unset child should be predefinited in layout.xml)
+2.php-public function unsetChild($alias) in /app/code/core/mage/core/block/abstract.php
+These 2 method only work with the block which already definited in layout.xml
+As for below method,that is to output cms static block to html(can not unsetchild!)
+$this->getLayout()->createBlock('cms/block')->setBlockId('copyright_warning')->toHtml();
 
+
+<reference name="footer">
+<action method="unsetChild"><name>block_footer_primary_bottom_left</name></action>
+<action method="unsetChild"><?>copyright_warning</?></action>
+</reference>
 
 ========================================================================================================================================================================
 
