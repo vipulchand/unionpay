@@ -1,0 +1,4 @@
+Once you have turned your site off-line using admin » settings » site maintenance (admin/settings), you can log back in by visiting:
+http://example.com/?q=user
+webaddress:
+http://drupal.org/node/56995
