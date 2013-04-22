@@ -8209,17 +8209,23 @@ comment:
 1.add rating into category layered
 2.cms navigation update (for everwines's header)
 know issue:different store has a different rating value - corrected - done.
+->
 
 Header:
 <a class="level-top" href="#"><span>HOTLINE: 400 888 6279</span></a>
 <a class="level-top" href="#"><span>ABOUT EVERWINES</span></a> | <a class="level-top" href="#"><span>OUR SHOPS</span></a> | <a class="level-top" href="#"><span>CONTACT</span></a>
 
-
 3.product view page
-
 4.FAQ page
 
-
+to be continued:
+/app/design/frontend/base/default/template/catalog/layer/state.phtml
+Currently Choose/shipping by:
+<?php if('RATING'==$_filter->getName()):?>
+        <div class="label"><?php echo $this->__($_filter->getName()) ?>:</div> <span class="value" align="right"><?php echo $_filter->getLabel() ?></span>
+        <?php else:?>
+            <span class="label"><?php echo $this->__($_filter->getName()) ?>:</span> <span class="value" align="right"><?php echo $_filter->getLabel() ?></span>
+            <?php endif;?>
 
 ========================================================================================================================================================================
 
