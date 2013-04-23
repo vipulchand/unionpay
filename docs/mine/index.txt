@@ -8112,7 +8112,8 @@ Attributes of product:
 5.grape variety (new)
 >6.rating (new)
 7.brands (new)
-8.style (new)
+8.style (new)//Mage::register('product', $product);
+        //Mage::register('current_product', $product);
 
 Task:
 1.add rating to search
@@ -8149,7 +8150,7 @@ $data->setReviewsCount($reviewsCount)
                 ->setEntityType($object->getEntityId())
                 ->setRatingSummary(($ratingSummary > 0) ? $ratingSummary : 0)
                 ->setStoreId($ratingSummaryObject->getStoreId());
-to update the $ratingSummary
+to update the $ratingSummarydd rating into category layered(Tmo_Review) 2.cms navigation update (for everwin
 
 table:
 eav_attribute_option_value
@@ -8202,7 +8203,7 @@ order:asc/html/20,40,60,80,100/
 <span class="ratings"><span class="rating-box"><span style="width:80%" class="rating"></span></span></span>
 <span class="ratings"><span class="rating-box"><span style="width:100%" class="rating"></span></span></span>
 -done.
-
+dd rating into category layered(Tmo_Review) 2.cms navigation update (for everwin
 2.update navigation for header(should could use static block and navigation function)
 -done.
 comment:
@@ -8226,6 +8227,12 @@ Currently Choose/shipping by:
         <?php else:?>
             <span class="label"><?php echo $this->__($_filter->getName()) ?>:</span> <span class="value" align="right"><?php echo $_filter->getLabel() ?></span>
             <?php endif;?>
+        tmo_review remove below coding:
+        //Mage::register('product', $product);
+        //Mage::register('current_product', $product);
+        ->
+        fe81586fc2b59bad2eae8bdf710175b09652ac9e make upload image dispear
+
 
 ========================================================================================================================================================================
 
