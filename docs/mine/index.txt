@@ -8288,19 +8288,19 @@ Task: Create Product
 20130424
 
 bugs:
-->here???
 1.create product - Coupon Code
-2.upload product image
+2.upload product image - function work well,just need to check coupon code
+->
+
+
 3.also need to test custom layout again
 
-current->
+
 catalog_product_view for the frontend
 <catalog_product_view> -> <reference name="product.info">
 
 <div style="position:relative;float:right;" class="flex" id="id_3893a51d7e51418a53db1b88a21ad23f_Uploader-flash"><embed width="230" height="20" allowfullscreen="true" flashvars="bridgeName=flexMovieUID1bridge" name="flexMovieUID1" wmode="transparent" src="http://mo-commerce.com.dev/skin/adminhtml/tmo/default/media/uploader.swf" top="300" left="100" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer" quality="high"></div>
 <div style="position:relative;float:right;" class="flex" id="id_0e19a575b8c0d572151431f8a6faf322_Uploader-flash"><embed width="230" height="20" allowfullscreen="true" flashvars="bridgeName=flexMovieUID1bridge" name="flexMovieUID1" wmode="transparent" src="http://magento.com.dev/skin/adminhtml/default/default/media/uploader.swf" top="300" left="100" allowscriptaccess="always" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer" quality="high"></div>
-
-->
 
 infortis extensions -> zoom -> enable -> Use Cloud Zoom -> Yes
 
@@ -8308,12 +8308,17 @@ our project:
 ('no_selection'!=$product->getImage()
 /app/design/frontend/ultimo/tmo/template/infortis/cloudzoom/product/view/media.phtml
 
-
 /app/code/core/mage/catalog/block/product/view/media.php -> getGalleryImages()
 will be a help
 
+string(661) "SELECT `e`.*, `at_qty`.`qty`, `at_status`.`value` AS `status`, `at_visibility`.`value` AS `visibility` FROM `catalog_product_entity` AS `e` LEFT JOIN `cataloginventory_stock_item` AS `at_qty` ON (at_qty.`product_id`=e.entity_id) AND (at_qty.stock_id=1) INNER JOIN `catalog_product_entity_int` AS `at_status` ON (`at_status`.`entity_id` = `e`.`entity_id`) AND (`at_status`.`attribute_id` = '96') AND (`at_status`.`store_id` = 0) INNER JOIN `catalog_product_entity_int` AS `at_visibility` ON (`at_visibility`.`entity_id` = `e`.`entity_id`) AND (`at_visibility`.`attribute_id` = '102') AND (`at_visibility`.`store_id` = 0) ORDER BY `e`.`entity_id` DESC LIMIT 20"
+string(2282) "SELECT `e`.*, `at_qty`.`qty`, `at_name`.`value` AS `name`, IF(at_custom_name.value_id > 0, at_custom_name.value, at_custom_name_default.value) AS `custom_name`, IF(at_status.value_id > 0, at_status.value, at_status_default.value) AS `status`, IF(at_visibility.value_id > 0, at_visibility.value, at_visibility_default.value) AS `visibility`, `at_price`.`value` AS `price` FROM `catalog_product_entity` AS `e` LEFT JOIN `cataloginventory_stock_item` AS `at_qty` ON (at_qty.`product_id`=e.entity_id) AND (at_qty.stock_id=1) INNER JOIN `catalog_product_website` AS `product_website` ON product_website.product_id = e.entity_id AND product_website.website_id = '10' INNER JOIN `catalog_product_entity_varchar` AS `at_name` ON (`at_name`.`entity_id` = `e`.`entity_id`) AND (`at_name`.`attribute_id` = '71') AND (`at_name`.`store_id` = 0) INNER JOIN `catalog_product_entity_varchar` AS `at_custom_name_default` ON (`at_custom_name_default`.`entity_id` = `e`.`entity_id`) AND (`at_custom_name_default`.`attribute_id` = '71') AND `at_custom_name_default`.`store_id` = 0 LEFT JOIN `catalog_product_entity_varchar` AS `at_custom_name` ON (`at_custom_name`.`entity_id` = `e`.`entity_id`) AND (`at_custom_name`.`attribute_id` = '71') AND (`at_custom_name`.`store_id` = '11') INNER JOIN `catalog_product_entity_int` AS `at_status_default` ON (`at_status_default`.`entity_id` = `e`.`entity_id`) AND (`at_status_default`.`attribute_id` = '96') AND `at_status_default`.`store_id` = 0 LEFT JOIN `catalog_product_entity_int` AS `at_status` ON (`at_status`.`entity_id` = `e`.`entity_id`) AND (`at_status`.`attribute_id` = '96') AND (`at_status`.`store_id` = '11') INNER JOIN `catalog_product_entity_int` AS `at_visibility_default` ON (`at_visibility_default`.`entity_id` = `e`.`entity_id`) AND (`at_visibility_default`.`attribute_id` = '102') AND `at_visibility_default`.`store_id` = 0 LEFT JOIN `catalog_product_entity_int` AS `at_visibility` ON (`at_visibility`.`entity_id` = `e`.`entity_id`) AND (`at_visibility`.`attribute_id` = '102') AND (`at_visibility`.`store_id` = '11') LEFT JOIN `catalog_product_entity_decimal` AS `at_price` ON (`at_price`.`entity_id` = `e`.`entity_id`) AND (`at_price`.`attribute_id` = '75') AND (`at_price`.`store_id` = 0) ORDER BY `e`.`entity_id` DESC LIMIT 20"
+/app/code/core/mage/adminhtml/block/catalog/product/grid.php
 ->
-Coupon Code / Coupon Barcode
+
+compare above with original magento
+->
+name is totally different with name in english
 
 
 ========================================================================================================================================================================
