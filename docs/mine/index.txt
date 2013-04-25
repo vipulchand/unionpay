@@ -8322,13 +8322,34 @@ name is totally different with name in english
 
 
 ========================================================================================================================================================================
-
 todo:
-0.new database
-1.open everwines set -> 13
-2.remove $product->createCouponBarcodeImage();
+0.new database - done.
+1.open everwines set -> 13 - done.
+2.remove $product->createCouponBarcodeImage(); - done.
+
+========================================================================================================================================================================
+20130425
+
 bugs:
-save product
+1.update the product name when save product
+all data will be duplicated!
+->
+
+
+Answer:
+/app/code/core/mage/eav/model/entity/collection/abstract.php
+-        // orignal
+-        // return parent::addItem($object);
+-        try { return parent::addItem($object); } catch (Exception $ex) { }
++        return parent::addItem($object);
+Item (Tmo_Catalog_Model_Product) with the same id "82" already exist
+solution:
+try { return parent::addItem($object); } catch (Exception $ex) { }
++        return parent::addItem($object);
+
+
+2.create attribute sets by internal sql file
+
 
 
 ========================================================================================================================================================================
@@ -8383,3 +8404,8 @@ casher: Yanli Wang <yanli.wang@tmogroup.asia>
 hr: wendy / Yan jiao Lv <wendy.lv@tmogroup.asia>
 
 ********************************************************************************************************************************************************
+/app/code/core/mage/core/model/abstract.php
+/app/code/core/mage/catalog/model/resource/product.php
+/app/code/core/mage/eav/model/entity/abstract.php
+/app/code/core/mage/eav/model/entity/abstract.php
+
