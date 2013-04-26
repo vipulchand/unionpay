@@ -8347,9 +8347,19 @@ solution:
 try { return parent::addItem($object); } catch (Exception $ex) { }
 +        return parent::addItem($object);
 
-
 2.create attribute sets by internal sql file
 
+========================================================================================================================================================================
+20130426
+
+1.
+/app/code/core/mage/core/model/abstract.php
+/app/code/core/mage/catalog/model/resource/product.php
+/app/code/core/mage/eav/model/entity/abstract.php
+/app/code/core/mage/eav/model/entity/abstract.php
+
+2.
+Create catalog/category/product use "MySQL Workbench"
 
 
 ========================================================================================================================================================================
@@ -8404,8 +8414,3 @@ casher: Yanli Wang <yanli.wang@tmogroup.asia>
 hr: wendy / Yan jiao Lv <wendy.lv@tmogroup.asia>
 
 ********************************************************************************************************************************************************
-/app/code/core/mage/core/model/abstract.php
-/app/code/core/mage/catalog/model/resource/product.php
-/app/code/core/mage/eav/model/entity/abstract.php
-/app/code/core/mage/eav/model/entity/abstract.php
-
