@@ -8353,13 +8353,37 @@ try { return parent::addItem($object); } catch (Exception $ex) { }
 20130426
 
 1.
-/app/code/core/mage/core/model/abstract.php
-/app/code/core/mage/catalog/model/resource/product.php
 /app/code/core/mage/eav/model/entity/abstract.php
-/app/code/core/mage/eav/model/entity/abstract.php
+$result = compact('newObject', 'entityRow', 'insert', 'update', 'delete');
+
 
 2.
 Create catalog/category/product use "MySQL Workbench"
+
+
+========================================================================================================================================================================
+20130427
+below folder to store sql file to create the new attribute for everwines:
+/app/code/local/tmo/catalog/sql/tmo_catalog_setup/
+
+Requirement:
+Please spend some more thoughts on it.
+You do not need to think about magento and EAV for now, the task is about your understanding of the data and about how you would organize it in the best way you can come up with.
+You need to think about separation of concerns, e.g.
+
+brand data in a brand entity,
+regional data in a region entity,
+supplier data in a supplier entity etc.
+to avoid redundancies and inconsistencies (which should be your highest target in solving this issue).
+
+A few hints to see whether your model has issues can also be:
+- One large entity with many relations to others
+- Circular dependencies (multiple relationships between two entities)
+- Crossing dependencies (design the model in a way that the visualized relationships do not cross each other)
+
+Task:
+1.find why about duplicated attribute items when save product
+2.add attributres into sql file
 
 
 ========================================================================================================================================================================
