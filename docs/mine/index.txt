@@ -8382,8 +8382,61 @@ A few hints to see whether your model has issues can also be:
 - Crossing dependencies (design the model in a way that the visualized relationships do not cross each other)
 
 Task:
-1.find why about duplicated attribute items when save product
-2.add attributres into sql file
+1. find why about duplicated attribute items when save product
+2. add attributres into sql file
+
+
+========================================================================================================================================================================
+20130428
+1. restore the database - done.
+2. restructure the database for the attributes of product.
+
+
+Import and export function work well:
+remove image of product by csv
+
+export attributes of image of everwines:
+
+base image / image
+small image / small_image
+Thumbnail / thumbnail
+
+import product & product images:
+folder:
+1.upload images to folder: /media/import/xxx xxx with details
+2.create & save new profiles of dataflow to import the images from csv file:
+3.upload csv file to server
+4.run profile
+
+[FORMAT OF CSV]
+"store","websites","sku","attribute_set","image","winery_brand","small_image","thumbnail"
+"com_everwines_en_us","com_everwines","everwine","Everwines","/l/o/logo_3.png","mx1","/l/o/logo_3.png","/l/o/logo_3.png"
+[FORMAT OF CSV]
+
+->Reference:
+Knowledge Base: Working with product CSV file:
+http://go.magento.com/support/kb/entry/name/working-with-product-csv-files/
+Importing product images:
+http://www.magentocommerce.com/knowledge-base/entry/importing-product-images
+
+[Programmatically removing product images in Magento]
+$_product = Mage::getModel('catalog/product')->load('1234');
+$mediaApi = Mage::getModel("catalog/product_attribute_media_api");
+try {
+    $items = $mediaApi->items($_product->getId());
+    foreach($items as $item) {
+        echo ($mediaApi->remove($_product->getId(), $item['file']));
+    }
+} catch (Exception $exception){
+    var_dump($exception);
+    die('Exception Thrown');
+}
+[Programmatically removing product images in Magento]
+
+
+What we have now
+
+ni hao, wode telephone number shi +86 131 6633 6269
 
 
 ========================================================================================================================================================================
